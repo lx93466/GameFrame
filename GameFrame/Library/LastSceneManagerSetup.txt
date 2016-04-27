@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Plugins/excel/example/test.unity
+  isLoaded: 1
+  isActive: 1
