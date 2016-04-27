@@ -31,8 +31,6 @@ namespace GameFrame
 
         public UIEventHandle onDrop;
 
-        public UIEventHandle onMove;
-
         public UIEventHandle onScroll;
 
         public void OnPointerClick(PointerEventData eventData)
@@ -83,7 +81,11 @@ namespace GameFrame
                 onEndDrag(eventData);
             }
         }
-
+        /// <summary>
+        /// 当使用OnDrop事件时，为了使被拖动对象A能够掉落到接受Drop事件的对象B身上，
+        /// B必须优于A渲染，即：B对象位于A对象下边。
+        /// </summary>
+        /// <param name="eventData"></param>
         public void OnDrop(PointerEventData eventData)
         {
             if (onDrop != null)
