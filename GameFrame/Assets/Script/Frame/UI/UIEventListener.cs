@@ -2,10 +2,9 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 
+
 namespace GameFrame
 {
-    using UIEventData = PointerEventData;
-
     public class UIEventListener : MonoBehaviour,
                                IPointerClickHandler,
                                IPointerDownHandler,
@@ -14,10 +13,9 @@ namespace GameFrame
                                IBeginDragHandler,
                                IDragHandler,
                                IEndDragHandler,
-                               IScrollHandler,
-                               IMoveHandler
+                               IScrollHandler                             
     {
-        public delegate void UIEventHandle(UIEventData uiEventData);
+        public delegate void UIEventHandle(PointerEventData uiEventData);
 
         public UIEventHandle onClick;
 
