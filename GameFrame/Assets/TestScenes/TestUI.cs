@@ -3,19 +3,29 @@ using System.Collections;
 using UnityEngine.UI;
 using GameFrame;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
+using System.Collections.Generic;
 
 public class TestUI : MonoBehaviour {
     
     public GameObject buttonObj;
 
-    public GameObject dropImg;
+    public GameObject scrollObj;
 
     public Text text;
+
+    public Text tips;
+
+    ScrollRect scrollRect;
+
+    int i = 0;
 
 	// Use this for initialization
 	void Start () {
         text.text = "";
-       
+
+       // UnityEvent event1;
+
         UIEventListener buttonListener = Tools.GetComponent<UIEventListener>(buttonObj);
 
         buttonListener.onClick = click;
@@ -32,24 +42,27 @@ public class TestUI : MonoBehaviour {
 
         buttonListener.onScroll = scroll;
 
-        UIEventListener dropListener = Tools.GetComponent<UIEventListener>(dropImg);
+        UIEventListener dropListener = Tools.GetComponent<UIEventListener>(scrollObj);
 
-        dropListener.onDrop = drop;
+        dropListener.onDrop = drop;   
     }
 
+
     void click(PointerEventData uiEventData)
-    {
-        text.text += "click\n";      
+    {     
+        text.text += "click " + i + "\n";
+        text.rectTransform.sizeDelta = new Vector2(text.rectTransform.sizeDelta.x, text.preferredHeight);
     }
 
     void clickDown(PointerEventData uiEventData)
     {
-        text.text += "clickDown\n";
+        i++;
+        text.text += "clickDown " + i + "\n";      
     }
 
     void clickUp(PointerEventData uiEventData)
     {
-        text.text += "clickUp\n";
+        text.text += "clickUp " + i + "\n";  
     }
 
     void beginDrag(PointerEventData uiEventData)
@@ -68,9 +81,9 @@ public class TestUI : MonoBehaviour {
         Debug.Log("endDrag:GameObject[" + uiEventData.pointerDrag.name + "], Position[x:" + uiEventData.position.x + ", y:" + uiEventData.position.y);
     }
 
-    void scroll(PointerEventData uiEventData)
+    void scroll(Vector2 v2)
     {
-        Debug.Log("scroll");
+        Debug.Log("scrollValueChanged, v2 = " + v2.ToString());
     }
     void drop(PointerEventData uiEventData)
     {
@@ -78,4 +91,11 @@ public class TestUI : MonoBehaviour {
         uiEventData.pointerDrag.transform.position = new Vector3(uiEventData.position.x, uiEventData.position.y, 0);
         Debug.Log("*********************drop:GameObject[" + uiEventData.pointerDrag.name + "], Position[x:" + uiEventData.position.x + ", y:" + uiEventData.position.y + "]");
     }
+
+    //public void scrollValueChanged(Vector2 v2)
+    //{
+    //    //tips.text = Tools.ToString(scrollRect.verticalNormalizedPosition);
+    //   // Debug.Log("*******************" + scrollRect.verticalNormalizedPosition);
+    //    Debug.Log("scrollValueChanged, v2 = " + v2.ToString());
+    //}
 }

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 
 namespace GameFrame
@@ -12,26 +14,37 @@ namespace GameFrame
                                IDropHandler,
                                IBeginDragHandler,
                                IDragHandler,
-                               IEndDragHandler,
-                               IScrollHandler                             
+                               IEndDragHandler
     {
-        public delegate void UIEventHandle(PointerEventData uiEventData);
+        public delegate void UIEventHandle1(PointerEventData uiEventData);
+        public delegate void UIEventHandle2(Vector2 v2);
 
-        public UIEventHandle onClick;
+        public UIEventHandle1 onClick;
 
-        public UIEventHandle onClickUp;
+        public UIEventHandle1 onClickUp;
 
-        public UIEventHandle onClickDown;
+        public UIEventHandle1 onClickDown;
 
-        public UIEventHandle onBeginDrag;
+        public UIEventHandle1 onBeginDrag;
 
-        public UIEventHandle onDrag;
+        public UIEventHandle1 onDrag;
 
-        public UIEventHandle onEndDrag;
+        public UIEventHandle1 onEndDrag;
 
-        public UIEventHandle onDrop;
+        public UIEventHandle1 onDrop;
 
-        public UIEventHandle onScroll;
+        public UIEventHandle2 onScroll;
+
+        void start()
+        {
+            if (onScroll != null)
+            {
+                ScrollRect scrollRect = transform.GetComponent<ScrollRect>();
+
+                UnityAction<Vector2> action = new UnityAction<Vector2>(this.onScroll);
+                scrollRect.onValueChanged.AddListener(action);
+            }
+        }
 
         public void OnPointerClick(PointerEventData eventData)
         {
@@ -94,11 +107,11 @@ namespace GameFrame
             }
         }
 
-        public void OnScroll(PointerEventData eventData)
+        public void OnScroll(Vector2 v2)
         {
             if (onScroll != null)
             {
-                onScroll(eventData);
+                onScroll(v2);
             }
         }
     }
