@@ -44,12 +44,16 @@ public class TestUI : MonoBehaviour {
 
         UIEventListener dropListener = Tools.GetComponent<UIEventListener>(scrollObj);
 
-        dropListener.onDrop = drop;   
+        dropListener.onDrop = drop;
+
+       
     }
 
 
     void click(PointerEventData uiEventData)
-    {     
+    {
+       
+
         text.text += "click " + i + "\n";
         text.rectTransform.sizeDelta = new Vector2(text.rectTransform.sizeDelta.x, text.preferredHeight);
     }
@@ -91,4 +95,6 @@ public class TestUI : MonoBehaviour {
         uiEventData.pointerDrag.transform.position = new Vector3(uiEventData.position.x, uiEventData.position.y, 0);
         Debug.Log("*********************drop:GameObject[" + uiEventData.pointerDrag.name + "], Position[x:" + uiEventData.position.x + ", y:" + uiEventData.position.y + "]");
     }
+
+    
 }

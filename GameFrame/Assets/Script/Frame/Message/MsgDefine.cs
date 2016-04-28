@@ -5,8 +5,8 @@ using System.Text;
 
 namespace GameFrame
 {
-    class MsgType
+    enum MsgId
     {
-
+        testMsgId     //测试消息
     }
 }
