@@ -91,11 +91,4 @@ public class TestUI : MonoBehaviour {
         uiEventData.pointerDrag.transform.position = new Vector3(uiEventData.position.x, uiEventData.position.y, 0);
         Debug.Log("*********************drop:GameObject[" + uiEventData.pointerDrag.name + "], Position[x:" + uiEventData.position.x + ", y:" + uiEventData.position.y + "]");
     }
-
-    //public void scrollValueChanged(Vector2 v2)
-    //{
-    //    //tips.text = Tools.ToString(scrollRect.verticalNormalizedPosition);
-    //   // Debug.Log("*******************" + scrollRect.verticalNormalizedPosition);
-    //    Debug.Log("scrollValueChanged, v2 = " + v2.ToString());
-    //}
 }

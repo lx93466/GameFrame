@@ -4,6 +4,8 @@ namespace GameFrame
 {
     class Tools
     {
+        public static int msgId = 0;
+
         public static string GetAppDir()
         {
             string dir = Application.streamingAssetsPath;
@@ -15,6 +17,7 @@ namespace GameFrame
             Debug.LogWarning(warming);
         }
 
+        #region  常用数据转换接口
         public static int ToInt(string value)
         {
             return int.Parse(value);
@@ -32,7 +35,13 @@ namespace GameFrame
 
         public static string ToString(float value)
         {
-            return value.ToString();
+            return value.ToString();         
+        }
+        #endregion
+        
+        public static int GetMsgId()
+        {
+            return 0;
         }
 
         public static T GetComponent<T>(GameObject gameObject) where T : MonoBehaviour
