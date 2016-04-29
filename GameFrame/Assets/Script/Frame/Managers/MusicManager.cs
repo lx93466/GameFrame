@@ -40,8 +40,13 @@ namespace GameFrame
         }
 
 
-
-        public void PlayMusic(int musicPrimaryId)
+        /// <summary>
+        /// musicPrimaryId:音乐配置表主键ID
+        /// replay：如果正在播放，是否重新播放
+        /// </summary>
+        /// <param name="musicPrimaryId"></param>
+        /// <param name="rePlay"></param>
+        public void PlayMusic(int musicPrimaryId, bool replay = false)
         {
             if (m_audioObject == null)
             {
@@ -77,15 +82,47 @@ namespace GameFrame
                 {
                     if (config.m_musicType == MusicType.SpecialEffectMusic)
                     {
-                        m_specialEffectMusicAudioSource.clip = clip;
+                        if (m_specialEffectMusicAudioSource.clip == clip && m_specialEffectMusicAudioSource.isPlaying)
+                        {
+                            if (replay)
+                            {
+                                m_specialEffectMusicAudioSource.clip = clip;
 
-                        m_specialEffectMusicAudioSource.Play();
+                                m_specialEffectMusicAudioSource.Play();
+                            }
+                            else
+                            {
+                                Tools.AddWarming("当前特效音乐正在播放");
+                            }                          
+                        }
+                        else
+                        {
+                            m_specialEffectMusicAudioSource.clip = clip;
+
+                            m_specialEffectMusicAudioSource.Play();
+                        }                      
                     }
                     else if (config.m_musicType == MusicType.BackgroudMusic)
                     {
-                        m_backgroudMusicAudioSource.clip = clip;
+                        if (m_backgroudMusicAudioSource.clip == clip && m_backgroudMusicAudioSource.isPlaying)
+                        {
+                            if (replay)
+                            {
+                                m_backgroudMusicAudioSource.clip = clip;
 
-                        m_backgroudMusicAudioSource.Play();
+                                m_backgroudMusicAudioSource.Play();
+                            }
+                            else
+                            {
+                                Tools.AddWarming("当前背景音乐正在播放");
+                            }                          
+                        }
+                        else
+                        {
+                            m_backgroudMusicAudioSource.clip = clip;
+
+                            m_backgroudMusicAudioSource.Play();
+                        }                        
                     }
                 }
                 else

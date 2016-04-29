@@ -16,7 +16,7 @@ public class MusicTest : MonoBehaviour {
 	}
 
     public void Play(int i)
-    {
+    {      
         if (i == 1)
         {
             MusicManager.GetInstance().PlayMusic(1001);
@@ -24,7 +24,7 @@ public class MusicTest : MonoBehaviour {
         }
         else if (i == 2)
         {
-            MusicManager.GetInstance().PlayMusic(1004);
+            MusicManager.GetInstance().PlayMusic(1004, true);
             //AudioSource.PlayClipAtPoint(clip2, new Vector3(0, 0, 0));
         }
     }

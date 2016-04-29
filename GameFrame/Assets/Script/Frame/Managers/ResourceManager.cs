@@ -26,7 +26,7 @@ namespace GameFrame
         }
 
         public AudioClip ReadAudioClip(string file)
-        {
+        {   
             return Resources.Load(file) as AudioClip;
         }
     }
