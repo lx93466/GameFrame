@@ -21,6 +21,7 @@ namespace GameFrame
 
         protected DataTable m_table = null;
 
+        protected ArrayList m_configData = new ArrayList();
         /// <summary>
         /// 返回值：是否初始化成功
         /// </summary>
@@ -57,8 +58,8 @@ namespace GameFrame
 
         /// <summary>
         /// 形参：
-        ///     row：行号，从0开始，不读第一行
-        ///     cloum：列号，从0开始，读第一列
+        ///     row：行号，从1开始，不读第0行,第0行为表参数说明
+        ///     cloum：列号，从0开始，读第0列
         ///     即从xls的2A开始读取，2A对应行列为(0, 0)
         /// 返回：
         ///     读取格字符串，如果没有，返回""；
@@ -69,8 +70,6 @@ namespace GameFrame
         public string GetValue(int row, int column)
         {
             string value = "";
-
-            row = row + 1;
 
             if(row >=0 && row < m_rows && column >= 0 && column < m_columns)
             {
@@ -83,7 +82,14 @@ namespace GameFrame
 
         public abstract void Init();
         
-        public virtual void UnInit(){}
+        public virtual void UnInit()
+        {
+            m_configFileName = "";
+            m_configData.Clear();
+            m_columns = 0;
+            m_rows = 0;
+            m_table = null;
+        }
     }
 }
 

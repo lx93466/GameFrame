@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 namespace GameFrame
 {
@@ -62,9 +63,17 @@ namespace GameFrame
         }
     }
 
-    class Singleton<T> where T : class,new()
+    public class Singleton<T> where T : class,new()
     {
         private static T m_instance;
+
+        protected Singleton()
+        {
+            if (m_instance != null)
+            {
+                throw new Exception("单例对象已经存在，继承单例的类不能new，否则后果未知。");
+            }
+        }
 
         public static T GetInstance()
         {

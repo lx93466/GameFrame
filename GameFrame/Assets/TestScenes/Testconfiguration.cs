@@ -15,7 +15,7 @@ public class Testconfiguration : MonoBehaviour
 	void Start () 
     {
         var testConfigData = TestConfig.GetInstance().GetAllConfigData();
-        foreach (TestConfig.TestConfigData config in testConfigData)
+        foreach (TestConfigData config in testConfigData)
         {
             Debug.Log(config.m_name + "   " + config.m_sex + "    " + config.m_age);
         }

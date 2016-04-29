@@ -24,6 +24,11 @@ namespace GameFrame
 
             return stream;
         }
+
+        public AudioClip ReadAudioClip(string file)
+        {
+            return Resources.Load(file) as AudioClip;
+        }
     }
 }
 

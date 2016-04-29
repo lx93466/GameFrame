@@ -7,7 +7,9 @@ namespace GameFrame
     {
         public void Init()
         {
-            TestConfig.GetInstance().InitConfig();   
+            TestConfig.GetInstance().InitConfig();
+
+            MusicConfig.GetInstance().InitConfig();
         }
 
         public void UnInit()
