@@ -1,10 +1,16 @@
 ﻿using System.IO;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace GameFrame
 {
     class ResourceManager : Singleton<ResourceManager>
     {
+        //音乐，特效音乐缓存
+        Dictionary<string, AudioClip> m_audios = new Dictionary<string, AudioClip>(); 
+      
+
         public ResourceManager() { }
 
         public Stream ReadConfig(string file)
@@ -25,9 +31,21 @@ namespace GameFrame
             return stream;
         }
 
-        public AudioClip ReadAudioClip(string file)
-        {   
-            return Resources.Load(file) as AudioClip;
+        public AudioClip ReadAudioClip(string file, CacheTag cachable)
+        {
+            AudioClip clip = null;
+
+            if(!m_audios.TryGetValue(file, out clip))
+            {               
+                clip = Resources.Load(file) as AudioClip;
+
+                if (clip != null && CacheTag.Cachable == cachable)
+                {
+                    m_audios.Add(file, clip);                        
+                }
+                
+            }
+            return clip;
         }
     }
 }

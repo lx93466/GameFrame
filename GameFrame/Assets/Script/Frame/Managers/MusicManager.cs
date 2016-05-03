@@ -77,7 +77,7 @@ namespace GameFrame
             MusicConfigData config = GetMusicConfigByPrimaryKey(musicPrimaryId);
             if (config != null)
             {
-                AudioClip clip = ResourceManager.GetInstance().ReadAudioClip("Music/" + config.m_fileName);
+                AudioClip clip = ResourceManager.GetInstance().ReadAudioClip("Music/" + config.m_fileName, config.m_cachable);
                 if (clip != null)
                 {
                     if (config.m_musicType == MusicType.SpecialEffectMusic)

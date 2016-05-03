@@ -15,6 +15,12 @@ enum MusicType
     SpecialEffectMusic
 }
 
+enum CacheTag
+{
+    Cachable,
+    Uncachable
+}
+
 class MusicConfigData
 {
     public int m_index;
@@ -26,6 +32,8 @@ class MusicConfigData
     public MusicCycleTag m_cycleTag;
 
     public MusicType m_musicType;
+
+    public CacheTag m_cachable;
 }
 
 class MusicConfig : ConfigDataBaseClass
@@ -87,6 +95,17 @@ class MusicConfig : ConfigDataBaseClass
             else if (temp == 2)
             {
                 musicConfig.m_cycleTag = MusicCycleTag.Unrecyclable;
+            }
+
+            temp = Tools.ToInt(GetValue(i, 5));
+
+            if (temp == 1)
+            {
+                musicConfig.m_cachable = CacheTag.Cachable;
+            }
+            else if (temp == 2)
+            {
+                musicConfig.m_cachable = CacheTag.Uncachable;
             }
 
             m_configData.Add(musicConfig);
