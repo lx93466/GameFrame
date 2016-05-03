@@ -3,7 +3,7 @@ using System;
 
 namespace GameFrame
 {
-    class Tools
+    public class Tools
     {
         public static int msgId = 0;
 
@@ -15,7 +15,18 @@ namespace GameFrame
 
         public static void AddWarming(string warming)
         {
-            Debug.LogWarning(warming);
+            if (warming.Length != 0)
+            {
+                Debug.LogWarning(warming);
+            }         
+        }
+
+        public static void AddError(string error)
+        {
+            if (error.Length != 0)
+            {
+                Debug.LogError(error);
+            }           
         }
 
         #region  常用数据转换接口
@@ -40,11 +51,7 @@ namespace GameFrame
         }
         #endregion
         
-        public static int GetMsgId()
-        {
-            return 0;
-        }
-
+       
         public static T GetComponent<T>(GameObject gameObject) where T : MonoBehaviour
         {
             T t = null;
@@ -60,6 +67,50 @@ namespace GameFrame
             }
             
             return t;
+        }
+
+        /// <summary>
+        /// 锁屏、解锁屏
+        /// </summary>
+        public static void LockScreen()
+        {
+            GameObject instance = GameObject.Find("LockScreenCanvas");
+            if (instance == null)
+            {
+                GameObject go = Resources.Load<GameObject>("LockScreenCanvas");
+                if (go != null)
+                {
+                    instance = GameObject.Instantiate(go);
+                    instance.name = "LockScreenCanvas";
+                }
+                else
+                {
+                    Tools.AddWarming("Lock Screen Failed.");
+                }
+            }
+
+        }
+    
+        public static void UnlockScreen()
+        {
+            GameObject instance = GameObject.Find("LockScreenCanvas");
+            if (instance != null)
+            {
+                GameObject.Destroy(instance);
+            }
+        }
+
+        /// <summary>
+        /// 创建空游戏物体
+        /// </summary>
+        public static void CreatEmptyGameObject()
+        {
+            GameObject go = Resources.Load<GameObject>("EmptyObject");
+            if (go != null)
+            {
+                GameObject instance = GameObject.Instantiate(go);
+                instance.name = "EmptyObject";
+            }
         }
     }
 

@@ -41,6 +41,7 @@ public class TestMsg : MonoBehaviour {
     {
         MsgManager.GetInstance().UnRegisterMsg(MsgId.testMsgId);
     }
+
     void MsgCallback1(Hashtable args)
     {
         Debug.Log("MsgCallback1");

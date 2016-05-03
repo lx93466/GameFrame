@@ -15,7 +15,7 @@ namespace GameFrame
         undeletable             //不可删除的消息，即一直存在于消息管理器中
     }
 
-    public delegate void Callback(Hashtable args);   
+    public delegate void MsgCallback(Hashtable args);   
    
     class MsgManager : Singleton<MsgManager>
     {
@@ -26,9 +26,9 @@ namespace GameFrame
 
             public MsgType m_msgType = MsgType.deletable;
 
-            public Callback m_callbacks;
+            public MsgCallback m_callbacks;
 
-            public Msg(MsgId msgId, Callback callback, MsgType msgType)
+            public Msg(MsgId msgId, MsgCallback callback, MsgType msgType)
             {
                 m_msgId = msgId;
 
@@ -43,7 +43,7 @@ namespace GameFrame
 
         Dictionary<MsgId, Msg> m_msgDictionary = new Dictionary<MsgId, Msg>();
 
-        public void RegisterMsg(MsgId msgId, Callback callback, MsgType msgType = MsgType.deletable)
+        public void RegisterMsg(MsgId msgId, MsgCallback callback, MsgType msgType = MsgType.deletable)
         {
             Msg tempMsg = null;
 
@@ -88,7 +88,7 @@ namespace GameFrame
             return registerResult;
         }
        
-        public bool UnRegisterCallback(MsgId msgId, Callback callback)
+        public bool UnRegisterCallback(MsgId msgId, MsgCallback callback)
         {
             bool registerResult = true;
 
@@ -98,7 +98,12 @@ namespace GameFrame
             {
                 if (callback != null)
                 {
-                    tempMsg.m_callbacks -= callback;                    
+                    tempMsg.m_callbacks -= callback;
+                    
+                    if (tempMsg.m_callbacks == null)
+                    {
+                        UnRegisterMsg(msgId);
+                    }
                 }
                 else
                 {

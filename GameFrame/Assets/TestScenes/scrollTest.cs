@@ -69,4 +69,19 @@ public class scrollTest : MonoBehaviour {
      {
          Debug.Log("Scroll, v2 arg:" + v2.ToString());
      }
+
+     public void LockScreen()
+     {
+         Tools.LockScreen();
+     }
+
+     public void UnLockScreen()
+     {
+         Tools.UnlockScreen();
+     }
+
+     public void CreateEmptyObject()
+     {
+         Tools.CreatEmptyGameObject();
+     }
 }

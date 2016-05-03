@@ -8,8 +8,6 @@ public class RotateAnimation : MonoBehaviour {
     public float rotateTime = 1.0f;
     public float delayTime = 1.0f;
     public Direction direction = Direction.To;
-    
-    Hashtable ht = new Hashtable();
 
     void Awake()
     {

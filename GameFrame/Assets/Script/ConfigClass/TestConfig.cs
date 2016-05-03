@@ -1,7 +1,6 @@
 ﻿using GameFrame;
 using System.Collections;
 using System.Collections.Generic;
-using GameFrame;
 
 class TestConfigData
 {

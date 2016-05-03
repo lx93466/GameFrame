@@ -11,7 +11,7 @@ using System.Data;
 
 namespace GameFrame
 {
-    public abstract class ConfigDataBaseClass
+    abstract class ConfigDataBaseClass
     {
         protected string m_configFileName = "";
 

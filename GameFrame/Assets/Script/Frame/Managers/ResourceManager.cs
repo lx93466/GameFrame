@@ -47,6 +47,17 @@ namespace GameFrame
             }
             return clip;
         }
+
+        public GameObject LoadAsset(string file)
+        {
+            GameObject go = Resources.Load<GameObject>(file);
+
+            if (go == null)
+            {
+                Tools.AddWarming("ResourceManager.LoadAsset[" + file + "] failed.");
+            }
+            return go;
+        }
     }
 }
 
