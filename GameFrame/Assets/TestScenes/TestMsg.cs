@@ -7,10 +7,8 @@ public class TestMsg : MonoBehaviour {
          Hashtable hash = new Hashtable();
         hash.Add(1, "string1");
         hash.Add("ssss", gameObject);
-        for (int i = 0; i < 100; i++)
-        {
-            MsgManager.GetInstance().DispatchMsg(MsgId.testMsgId, hash);            
-        }
+       
+        MsgManager.GetInstance().DispatchMsg(MsgId.testMsgId, hash);                   
     }
 
     public void Rigister(int i)
