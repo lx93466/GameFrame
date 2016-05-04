@@ -11,8 +11,6 @@ public enum MsgId
 /// </summary>
 public enum UIType
 {
-    TestUI,
-    ShoppingUI,
-    PersonalInfoUI
+    LoginUI
 }
 

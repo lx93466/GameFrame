@@ -33,14 +33,14 @@ namespace GameFrame
 
         public bool m_closeAllPreUI = true; //关闭此UI时，是否关闭打开的所有UI。
 
-        public bool m_unclosable = false; //此UI是永不可关闭的
+       // public bool m_unclosable = false; //此UI是永不可关闭的
 
         public UIType m_uiType;
 
         private Dictionary<MsgId, MsgCallback> m_registeredMsgIds = new Dictionary<MsgId,MsgCallback>();
 
         /// <summary>
-        /// 重写此函数，初始化
+        /// 重写此函数时，初始化加载界面所需参数
         ///     m_path
         ///     m_file
         ///     m_backgroudMusicId
@@ -50,9 +50,17 @@ namespace GameFrame
         /// 
         /// m_backgroudMusicId未非必须初始化变量，不初始化时，没有背景音乐
         /// </summary>
-        protected virtual void Init()
+        protected virtual void BeforeOpen()
         {
            
+        }
+
+        /// <summary>
+        /// UI已经创建完毕，初始化游戏逻辑相关(m_root已经存在，只会调用一次)
+        /// </summary>
+        protected virtual void AftertOpen()
+        {
+
         }
 
         /// <summary>
@@ -108,7 +116,8 @@ namespace GameFrame
         /// </summary>
         public void Open()
         {
-            Init();
+            BeforeOpen();
+
             if (m_root == null)
             {
                 GameObject temp = GameObject.Find(m_file);
@@ -143,6 +152,8 @@ namespace GameFrame
                             InitBackgroud();
 
                             Display();
+
+                            AftertOpen();
                         }
                     }
                 }
@@ -167,18 +178,16 @@ namespace GameFrame
         /// <param name="isDestroyRoot"></param>
         public void Close(bool isDestroyRoot = true)
         {
-            Uninit();
-            if (!m_unclosable)
+            if (isDestroyRoot)
             {
-                if (isDestroyRoot)
-                {
-                    GameObject.Destroy(m_root.gameObject);
-                }
-                else
-                {
-                    Hide();
-                }
-            }         
+                GameObject.Destroy(m_root.gameObject);
+                m_root = null;
+            }
+            else
+            {
+                Hide();
+            }
+            Uninit();                  
         }
 
         public void Close(PointerEventData uiEventData)

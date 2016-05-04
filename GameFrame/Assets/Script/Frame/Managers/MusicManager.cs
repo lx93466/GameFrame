@@ -54,12 +54,9 @@ namespace GameFrame
                 
                 if (m_audioObject == null)
                 {
-                    m_audioObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    m_audioObject = Tools.CreatEmptyGameObject("Audio");
+                    //m_audioObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 
-                    m_audioObject.name = "Audio";
-
-                    m_audioObject.GetComponent<MeshRenderer>().enabled = false;
-
                     m_backgroudMusicAudioSource = m_audioObject.AddComponent<AudioSource>();
 
                     m_specialEffectMusicAudioSource = m_audioObject.AddComponent<AudioSource>();

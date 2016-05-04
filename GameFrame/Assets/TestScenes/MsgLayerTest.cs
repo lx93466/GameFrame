@@ -4,9 +4,9 @@ using GameFrame;
 
 class MsgUITest : UIBase
 {
-    protected override void Init()
+    protected override void BeforeOpen()
     {
-        base.Init();
+        base.BeforeOpen();
 
         m_path = "test";
 

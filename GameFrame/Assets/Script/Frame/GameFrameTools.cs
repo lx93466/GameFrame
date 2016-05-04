@@ -103,14 +103,15 @@ namespace GameFrame
         /// <summary>
         /// 创建空游戏物体
         /// </summary>
-        public static void CreatEmptyGameObject()
+        public static GameObject CreatEmptyGameObject(string name = "EmptyObject")
         {
             GameObject go = Resources.Load<GameObject>("EmptyObject");
             if (go != null)
             {
                 GameObject instance = GameObject.Instantiate(go);
-                instance.name = "EmptyObject";
+                instance.name = name;
             }
+            return go;
         }
     }
 

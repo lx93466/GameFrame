@@ -47,17 +47,14 @@ namespace GameFrame
                         if (m_UIDelegates.TryGetValue(tempUiType, out tempDelegate))
                         {
                             tempUiBase = tempDelegate();
-
-                            if (tempUiBase.m_unclosable == false)
-                            {
-                                CloseUI(tempUiType);
-                            }
+                           
+                            CloseUI(tempUiType);
                         }
                     }
                 }
                 else
                 {
-                    if (uiBase.m_closePreUI == true && uiBase.m_unclosable == false)
+                    if (uiBase.m_closePreUI == true)
                     {
                         UIType tempType = m_stackOpenedUI.Pop();
                         CloseUI(tempType);
