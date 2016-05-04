@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
+using GameFrame;
 
 public class StartGame : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    void Awake()
+    {
+        ConfigManager.GetInstance().Init();
+
+        UIManager.GetInstance().Init();
+
+    }
+    void Start()
+    {
+        UIManager.GetInstance().OpenUI(UIType.LoginUI);
+    }
 }

@@ -25,10 +25,10 @@ namespace GameFrame
 
         public void Init()
         {
-            RegisterUI(UIType.TestUI, MsgUITest.GetInstance);
+            RegisterUI(UIType.LoginUI, LoginUI.GetInstance);
         }
 
-        public void ShowUI(UIType uiType)
+        public void OpenUI(UIType uiType)
         {
             GetUIInstanceDelegate uiDelegate = null;
 

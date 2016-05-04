@@ -9,7 +9,7 @@ public class TestUI : MonoBehaviour {
        // MsgUITest.GetInstance().Open();
         UIManager.GetInstance().Init();
 
-        UIManager.GetInstance().ShowUI(UIType.TestUI);
+       // UIManager.GetInstance().OpenUI(UIType.TestUI);
         
 	}
 	

@@ -9,9 +9,10 @@ namespace GameFrame
         GameObject m_audioObject = null;
 
         AudioSource m_backgroudMusicAudioSource = null;
-     
+
         AudioSource m_specialEffectMusicAudioSource = null;
 
+        public void Init() { } 
 
         MusicConfigData GetMusicConfigByPrimaryKey(int key)
         {

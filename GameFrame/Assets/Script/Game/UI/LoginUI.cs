@@ -29,6 +29,11 @@ public class LoginUI : UIBase
             Tools.GetComponent<UIEventListener>(btn.gameObject).onClick = OnClickRegister;
         }
     }
+
+    public static LoginUI GetInstance()
+    {
+        return Singleton<LoginUI>.GetInstance();
+    }
     public void OnClickLogin(PointerEventData data)
     {
         Debug.Log("OnClickLogin");

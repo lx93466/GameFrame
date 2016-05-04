@@ -136,5 +136,7 @@ namespace GameFrame
             }
             return m_instance;
         }
+
+        public virtual void Init() { }
     }
 }
