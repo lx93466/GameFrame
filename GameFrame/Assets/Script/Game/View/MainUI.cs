@@ -16,8 +16,19 @@ public class MainUI : UIBase
         m_closeAllPreUI = true;
     }
 
+    protected override void AftertOpen()
+    {
+        RegisterUIEvent("LeftTop/HeadIcon", OnOpenPersonalInfo);
+    }
+
     public static MainUI GetInstance()
     {
         return Singleton<MainUI>.GetInstance();
+    }
+
+    private void OnOpenPersonalInfo(PointerEventData data)
+    {
+        UIManager.GetInstance().OpenUI(UIType.PersonalInfoUI);
+        Debug.Log("OnOpenPersonalInfo");
     }
 }

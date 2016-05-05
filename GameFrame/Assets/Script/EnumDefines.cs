@@ -15,6 +15,7 @@ public enum UIType
     None,
     LoginUI,
     RegisterUI,
-    MainUI
+    MainUI,
+    PersonalInfoUI
 }
 

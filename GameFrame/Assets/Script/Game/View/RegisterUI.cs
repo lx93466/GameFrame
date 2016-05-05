@@ -15,7 +15,7 @@ public class RegisterUI : UIBase
 
         m_clickBackgroud = true;
 
-        m_closePreUI = false;     
+        m_closePreUI = false;
     }
 
     protected override void AftertOpen()
