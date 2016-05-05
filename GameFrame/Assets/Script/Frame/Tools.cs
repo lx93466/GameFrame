@@ -21,6 +21,14 @@ namespace GameFrame
             }         
         }
 
+        public static void AddTip(string Tip)
+        {
+            if (Tip.Length != 0)
+            {
+                Debug.Log(Tip);
+            }
+        }
+
         public static void AddError(string error)
         {
             if (error.Length != 0)
@@ -112,6 +120,11 @@ namespace GameFrame
                 instance.name = name;
             }
             return go;
+        }
+
+        public static Vector2 GetResolution()
+        {
+            return new Vector2(1280, 720);
         }
     }
 

@@ -7,6 +7,20 @@ using UnityEngine.UI;
 
 namespace GameFrame
 {
+    public enum UIEventType
+    {
+        onClick,
+        onClickUp,
+        onClickDown,
+        onBeginDrag,
+        onDrag,
+        onEndDrag,
+        onDrop,
+        onScroll
+    }
+    public delegate void UIEventHandlePointerEventData(PointerEventData uiEventData);
+    public delegate void UIEventHandleVector2(Vector2 v2);
+
     public class UIEventListener : MonoBehaviour,
                                IPointerClickHandler,
                                IPointerDownHandler,
@@ -16,24 +30,21 @@ namespace GameFrame
                                IDragHandler,
                                IEndDragHandler
     {
-        public delegate void UIEventHandle1(PointerEventData uiEventData);
-        public delegate void UIEventHandle2(Vector2 v2);
+        public UIEventHandlePointerEventData onClick;
 
-        public UIEventHandle1 onClick;
+        public UIEventHandlePointerEventData onClickUp;
 
-        public UIEventHandle1 onClickUp;
+        public UIEventHandlePointerEventData onClickDown;
 
-        public UIEventHandle1 onClickDown;
+        public UIEventHandlePointerEventData onBeginDrag;
 
-        public UIEventHandle1 onBeginDrag;
+        public UIEventHandlePointerEventData onDrag;
 
-        public UIEventHandle1 onDrag;
+        public UIEventHandlePointerEventData onEndDrag;
 
-        public UIEventHandle1 onEndDrag;
+        public UIEventHandlePointerEventData onDrop;
 
-        public UIEventHandle1 onDrop;
-
-        public UIEventHandle2 onScroll;
+        public UIEventHandleVector2 onScroll;
 
         void start()
         {

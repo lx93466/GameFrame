@@ -9,8 +9,8 @@ using System.Collections.Generic;
 public class scrollTest : MonoBehaviour {
     /// <summary>
     /// 构造器实参可以为具有特点格式的委托，如：本处可以为委托
-    /// public delegate void UIEventHandle2( Vector2 v2 )的对象，
-    /// 即：UIEventHandle2 scroll;
+    /// public delegate void UIEventHandleVector2( Vector2 v2 )的对象，
+    /// 即：UIEventHandleVector2 scroll;
     /// </summary>
     void Start ()
      {

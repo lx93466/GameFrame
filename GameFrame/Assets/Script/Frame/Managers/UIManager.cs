@@ -10,6 +10,8 @@ namespace GameFrame
 
         public Stack<UIType> m_stackOpenedUI = new Stack<UIType>(); //已经打开的UI栈
 
+        public UIType m_curOpenedUIType = UIType.None; //当前最顶层UI
+
         //要使用的UI，必须注册
         public void RegisterUI(UIType uiType, GetUIInstanceDelegate uiDelegate)
         {
@@ -23,11 +25,6 @@ namespace GameFrame
             }
         }
 
-        public void Init()
-        {
-            RegisterUI(UIType.LoginUI, LoginUI.GetInstance);
-        }
-
         public void OpenUI(UIType uiType)
         {
             GetUIInstanceDelegate uiDelegate = null;
@@ -37,38 +34,59 @@ namespace GameFrame
                 UIBase uiBase = uiDelegate();
                
                 if (uiBase.m_closeAllPreUI)
-                {                   
-                    UIBase tempUiBase = null;
+                {                                    
+                    bool hasUI = true;
 
-                    GetUIInstanceDelegate tempDelegate = null;
-
-                    foreach (var tempUiType in m_stackOpenedUI)
+                    while (hasUI)
                     {
-                        if (m_UIDelegates.TryGetValue(tempUiType, out tempDelegate))
+                        if (m_stackOpenedUI.Count > 0)
                         {
-                            tempUiBase = tempDelegate();
+                            UIType tempUIType = m_stackOpenedUI.Peek();
                            
-                            CloseUI(tempUiType);
+                            CloseUI(tempUIType);
                         }
-                    }
+                        else
+                        {
+                            hasUI = false;
+                        }
+                    }                
                 }
                 else
                 {
                     if (uiBase.m_closePreUI == true)
-                    {
-                        UIType tempType = m_stackOpenedUI.Pop();
-                        CloseUI(tempType);
+                    {                                        
+                        CloseUI(m_curOpenedUIType);             
                     }
                 }
                
                 uiBase.Open();
+                m_curOpenedUIType = uiType;
                 m_stackOpenedUI.Push(uiType);
+                Tools.AddTip("Open UI:" + uiBase.m_file);
+            }
+            else
+            {
+                 Tools.AddWarming("You are not Registered UI:" + uiType.ToString());
             }
         }
 
         public void CloseUI(UIType uiType, bool isDestroy = true)
         {
             GetUIInstanceDelegate uiDelegate = null;
+
+            if (m_stackOpenedUI.Count > 0)
+            {
+                m_stackOpenedUI.Pop();
+              
+                if (m_stackOpenedUI.Count > 0 )
+                {
+                    m_curOpenedUIType = m_stackOpenedUI.Peek();
+                }
+                else
+                {
+                    m_curOpenedUIType = UIType.None;
+                }
+            } 
 
             if (m_UIDelegates.TryGetValue(uiType, out uiDelegate))
             {

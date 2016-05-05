@@ -3,7 +3,8 @@
 /// </summary>
 public enum MsgId
 {
-    testMsgId     //测试消息
+    testMsgId,     //测试消息
+    UpdateUI       //更新UI消息
 }
 
 /// <summary>
@@ -11,6 +12,9 @@ public enum MsgId
 /// </summary>
 public enum UIType
 {
-    LoginUI
+    None,
+    LoginUI,
+    RegisterUI,
+    MainUI
 }
 
