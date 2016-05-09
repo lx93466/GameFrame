@@ -6,6 +6,8 @@ class MainScene : SceneBase
 {
     protected override void BeforeOpen()
     {
+        base.BeforeOpen();
+
         m_scenePath = "Scenes";
 
         m_sceneFile = "MainScene";

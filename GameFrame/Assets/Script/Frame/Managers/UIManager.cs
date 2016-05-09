@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
+
 namespace GameFrame
 {
     public delegate UIBase GetUIInstanceDelegate();
@@ -92,6 +94,18 @@ namespace GameFrame
             {
                 uiDelegate().Close(isDestroy);
             }
-        }    
+        }
+
+        public override void Init()
+        {
+            MsgManager.GetInstance().RegisterMsg(MsgId.ReinitUIManager, ClearOpenedUITemp);
+        }
+
+        public void ClearOpenedUITemp(Hashtable args)
+        {
+            m_stackOpenedUI.Clear();
+          
+            m_curOpenedUIType = UIType.None;
+        }
     }
 }

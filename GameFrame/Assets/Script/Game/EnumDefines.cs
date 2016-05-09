@@ -3,8 +3,9 @@
 /// </summary>
 public enum MsgId
 {
-    testMsgId,     //测试消息
-    UpdateUI       //更新UI消息
+    testMsgId,      //测试消息
+    UpdateUI,       //更新UI消息
+    ReinitUIManager //重新初始化UIManager
 }
 
 /// <summary>

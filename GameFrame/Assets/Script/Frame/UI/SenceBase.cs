@@ -22,7 +22,7 @@ namespace GameFrame
 
         protected virtual void BeforeOpen()
         {
-
+            MsgManager.GetInstance().DispatchMsg(MsgId.ReinitUIManager);
         }
 
         protected virtual void AfterOpen()
