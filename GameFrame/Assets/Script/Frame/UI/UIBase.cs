@@ -174,7 +174,7 @@ namespace GameFrame
         /// <param name="isDestroyRoot"> true：销毁创建的UI游戏对象。  false：隐藏UI游戏对象，不销毁</param>
         public void Close(bool isDestroyRoot = true)
         {
-            if (isDestroyRoot)
+            if (isDestroyRoot && m_root != null)
             {
                 GameObject.Destroy(m_root.gameObject);
                 m_root = null;
@@ -200,9 +200,12 @@ namespace GameFrame
         /// </summary>
         public void Hide()
         {
-            m_visible = false;
+            if (m_root != null)
+            {
+                m_visible = false;
 
-            m_root.gameObject.SetActive(false);
+                m_root.gameObject.SetActive(false);
+            }        
         }
 
         /// <summary>

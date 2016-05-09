@@ -9,7 +9,7 @@ namespace GameFrame
 
         public string m_sceneFile = "";//文件名称
 
-        public UIType m_mainUIType = UIType.None;
+        public UIType m_mainUIType = UIType.None;//打开Scene时，同时打开的UI界面
 
         public SceneType m_SceneType = SceneType.None;
 

@@ -41,11 +41,9 @@ namespace GameFrame
 
                     while (hasUI)
                     {
-                        if (m_stackOpenedUI.Count > 0)
-                        {
-                            UIType tempUIType = m_stackOpenedUI.Peek();
-                           
-                            CloseUI(tempUIType);
+                        if (m_curOpenedUIType != UIType.None)
+                        {                          
+                            CloseUI(m_curOpenedUIType);
                         }
                         else
                         {
@@ -55,15 +53,18 @@ namespace GameFrame
                 }
                 else
                 {
-                    if (uiBase.m_closePreUI == true)
+                    if (uiBase.m_closePreUI == true && m_curOpenedUIType != UIType.None)
                     {                                        
                         CloseUI(m_curOpenedUIType);             
                     }
                 }
                
                 uiBase.Open();
-                m_curOpenedUIType = uiType;
+              
+                m_curOpenedUIType = uiType;             
+              
                 m_stackOpenedUI.Push(uiType);
+               
                 Tools.AddTip("Open UI:" + uiBase.m_file);
             }
             else
@@ -74,13 +75,18 @@ namespace GameFrame
 
         public void CloseUI(UIType uiType, bool isDestroy = true)
         {
-            GetUIInstanceDelegate uiDelegate = null;
-
-            if (m_stackOpenedUI.Count > 0)
+            if (m_curOpenedUIType == uiType && m_curOpenedUIType != UIType.None)//只能关闭打开的最顶层的UI
             {
+                GetUIInstanceDelegate uiDelegate = null;
+
+                if (m_UIDelegates.TryGetValue(uiType, out uiDelegate))
+                {
+                    uiDelegate().Close(isDestroy);
+                }
+
                 m_stackOpenedUI.Pop();
-              
-                if (m_stackOpenedUI.Count > 0 )
+
+                if (m_stackOpenedUI.Count > 0)
                 {
                     m_curOpenedUIType = m_stackOpenedUI.Peek();
                 }
@@ -88,11 +94,11 @@ namespace GameFrame
                 {
                     m_curOpenedUIType = UIType.None;
                 }
-            } 
-
-            if (m_UIDelegates.TryGetValue(uiType, out uiDelegate))
+            }
+            else
             {
-                uiDelegate().Close(isDestroy);
+                Tools.AddTip("1.The closing UIType[" + uiType.ToString() + "] is not toppest UI,it can't be closed; \n" +
+                    "2.The closing UIType is none. " );
             }
         }
 

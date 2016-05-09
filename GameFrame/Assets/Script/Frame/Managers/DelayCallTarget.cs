@@ -48,7 +48,7 @@ namespace GameFrame
             {
                 m_delayCallback();
 
-                GameObject.Destroy(this);
+                GameObject.Destroy(this.gameObject);          
             }
         }
 
@@ -56,7 +56,7 @@ namespace GameFrame
         {
             if (m_delayCallback != null)
             {
-                DontDestroyOnLoad(this);
+                DontDestroyOnLoad(this.gameObject);
                 StartCoroutine(call());                
             }
         }
