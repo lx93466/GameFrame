@@ -29,6 +29,8 @@ namespace GameFrame
         /// <returns></returns>
         public void InitConfig()
         {
+            m_configData.Clear();
+
             Init();
 
             string file = GameFrame.Tools.GetAppDir() + m_configFileName;

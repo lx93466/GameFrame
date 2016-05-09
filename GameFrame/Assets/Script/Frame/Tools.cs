@@ -114,12 +114,14 @@ namespace GameFrame
         public static GameObject CreatEmptyGameObject(string name = "EmptyObject")
         {
             GameObject go = Resources.Load<GameObject>("EmptyObject");
+
+            GameObject instance = null;
             if (go != null)
             {
-                GameObject instance = GameObject.Instantiate(go);
+                instance = GameObject.Instantiate(go);
                 instance.name = name;
             }
-            return go;
+            return instance;
         }
 
         public static Vector2 GetResolution()

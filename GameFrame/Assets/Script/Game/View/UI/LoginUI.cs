@@ -31,7 +31,7 @@ public class LoginUI : UIBase
     }
     public void OnClickLogin(PointerEventData data)
     {
-        UIManager.GetInstance().OpenUI(UIType.MainUI);
+        GameSceneManager.GetInstance().OpenScene(SceneType.MainScene);
 
         Debug.Log("OnClickLogin");
     }
