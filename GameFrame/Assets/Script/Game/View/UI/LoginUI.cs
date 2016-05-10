@@ -32,15 +32,11 @@ public class LoginUI : UIBase
     public void OnClickLogin(PointerEventData data)
     {
         GameSceneManager.GetInstance().OpenScene(SceneType.MainScene);
-
-        Debug.Log("OnClickLogin");
     }
 
     public void OnClickRegister(PointerEventData data)
     {
         UIManager.GetInstance().OpenUI(UIType.RegisterUI);
-      
-        Debug.Log("OnClickRegister");
     }
 
     private void UpdateUI(Hashtable hashtable = null)

@@ -29,6 +29,5 @@ public class MainUI : UIBase
     private void OnOpenPersonalInfo(PointerEventData data)
     {
         UIManager.GetInstance().OpenUI(UIType.PersonalInfoUI);
-        Debug.Log("OnOpenPersonalInfo");
     }
 }
