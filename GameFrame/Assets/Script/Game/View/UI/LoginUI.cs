@@ -20,7 +20,7 @@ public class LoginUI : UIBase
         RegisterUIEvent("LoginButton", OnClickLogin);
         RegisterUIEvent("RegisterButton", OnClickRegister);
 
-        RegisterMsg(MsgId.UpdateUI, UpdateUI);
+        RegisterMsg(UIMsgDefine.UpdateUIMsg, UpdateUI);
 
         UpdateUI();
     }

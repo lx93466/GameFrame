@@ -220,7 +220,7 @@ namespace GameFrame
 
         protected void RegisterMsg(MsgId msgId, MsgCallback callback)
         {
-            MsgManager.GetInstance().RegisterMsg(msgId, callback, MsgType.deletable);
+            MsgManager.GetInstance().RegisterMsg(msgId, callback);
 
             m_registeredMsgIds.Add(msgId, callback);
         }

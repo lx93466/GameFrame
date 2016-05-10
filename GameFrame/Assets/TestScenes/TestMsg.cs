@@ -1,25 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
 using GameFrame;
+
+class TestMsgDefine
+{
+    public static MsgId testMsgid;
+}
+
 public class TestMsg : MonoBehaviour {
     public void Dispach()
     {
          Hashtable hash = new Hashtable();
         hash.Add(1, "string1");
         hash.Add("ssss", gameObject);
-       
-        MsgManager.GetInstance().DispatchMsg(MsgId.testMsgId, hash);                   
+
+        MsgManager.GetInstance().DispatchMsg(TestMsgDefine.testMsgid, hash);                   
     }
 
     public void Rigister(int i)
     {
         if (i == 1)
         {
-            MsgManager.GetInstance().RegisterMsg(MsgId.testMsgId, MsgCallback1);            
+            MsgManager.GetInstance().RegisterMsg(TestMsgDefine.testMsgid, MsgCallback1);            
         }
         else if (i == 2)
         {
-            MsgManager.GetInstance().RegisterMsg(MsgId.testMsgId, MsgCallback2);            
+            MsgManager.GetInstance().RegisterMsg(TestMsgDefine.testMsgid, MsgCallback2);            
         }
     }
 
@@ -27,17 +33,17 @@ public class TestMsg : MonoBehaviour {
     {
         if (i == 1)
         {
-            MsgManager.GetInstance().UnRegisterCallback(MsgId.testMsgId, MsgCallback1);
+            MsgManager.GetInstance().UnRegisterCallback(TestMsgDefine.testMsgid, MsgCallback1);
         }
         else if (i == 2)
         {
-            MsgManager.GetInstance().UnRegisterCallback(MsgId.testMsgId, MsgCallback2);
+            MsgManager.GetInstance().UnRegisterCallback(TestMsgDefine.testMsgid, MsgCallback2);
         }
     }
    
     public void UnRigisterAll()
     {
-        MsgManager.GetInstance().UnRegisterMsg(MsgId.testMsgId);
+        MsgManager.GetInstance().UnRegisterMsg(TestMsgDefine.testMsgid);
     }
 
     void MsgCallback1(Hashtable args)

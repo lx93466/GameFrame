@@ -4,6 +4,11 @@ using System.Collections;
 
 namespace GameFrame
 {
+    public class UIManagerMsgDefine
+    {
+        public static MsgId ClearOpenedUIMsg = new MsgId();
+    }
+
     public delegate UIBase GetUIInstanceDelegate();
 
     public class UIManager : Singleton<UIManager>
@@ -104,7 +109,7 @@ namespace GameFrame
 
         public override void Init()
         {
-            MsgManager.GetInstance().RegisterMsg(MsgId.ReinitUIManager, ClearOpenedUITemp);
+            MsgManager.GetInstance().RegisterMsg(UIManagerMsgDefine.ClearOpenedUIMsg, ClearOpenedUITemp);
         }
 
         public void ClearOpenedUITemp(Hashtable args)

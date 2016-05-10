@@ -45,7 +45,7 @@ public class RegisterUI : UIBase
             }
         }
 
-        MsgManager.GetInstance().DispatchMsg(MsgId.UpdateUI);
+        MsgManager.GetInstance().DispatchMsg(UIMsgDefine.UpdateUIMsg);
 
         UIManager.GetInstance().CloseUI(m_uiType);
 

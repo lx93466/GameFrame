@@ -1,13 +1,4 @@
-﻿/// <summary>
-/// 消息定义
-/// </summary>
-public enum MsgId
-{
-    testMsgId,      //测试消息
-    UpdateUI,       //更新UI消息
-    ReinitUIManager //重新初始化UIManager
-}
-
+﻿
 /// <summary>
 /// UI类型定义，如：背包、商城等。
 /// </summary>
