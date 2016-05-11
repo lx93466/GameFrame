@@ -5,9 +5,9 @@ namespace GameFrame
 {
     public class GameBehaviour : MonoBehaviour 
     {
-        Dictionary<MsgId, MsgCallback> m_registeredMsg = new Dictionary<MsgId, MsgCallback>();	   
+        Dictionary<Msg, MsgCallback> m_registeredMsg = new Dictionary<Msg, MsgCallback>();	   
 
-        protected void RegisterMsg(MsgId msgId, MsgCallback callback)
+        protected void RegisterMsg(Msg msgId, MsgCallback callback)
         {
             if (MsgManager.GetInstance().RegisterMsg(msgId, callback))
             {

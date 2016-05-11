@@ -2,6 +2,6 @@
 
 class UIMsgDefine
 {
-    public static MsgId UpdateUIMsg = new MsgId();
+    public static Msg UpdateUIMsg = new Msg();
 }
 

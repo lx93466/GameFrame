@@ -4,7 +4,7 @@ using GameFrame;
 
 class TestMsgDefine
 {
-    public static MsgId testMsgid = new MsgId();
+    public static Msg testMsgid = new Msg();
 }
 
 public class TestMsg : MonoBehaviour {
@@ -14,7 +14,7 @@ public class TestMsg : MonoBehaviour {
         hash.Add(1, "string1");
         hash.Add("ssss", gameObject);
 
-        MsgManager.GetInstance().DispatchMsg(TestMsgDefine.testMsgid, hash);                   
+        MsgManager.GetInstance().DispatchMsg(TestMsgDefine.testMsgid);                   
     }
 
     public void Rigister(int i)

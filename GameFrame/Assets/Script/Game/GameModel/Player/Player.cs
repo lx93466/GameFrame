@@ -2,8 +2,8 @@
 
 public class PlayerMsg
 {
-    public static MsgId standMsg = new MsgId();
-    public static MsgId moveMsg = new MsgId();
+    public static Msg standMsg = new Msg();
+    public static Msg moveMsg = new Msg();
 }
 
 public class Player

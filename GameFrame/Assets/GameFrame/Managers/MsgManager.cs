@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace GameFrame
 {
-    public class MsgId
+    public class Msg
     {
         public int msgId = -9999999;
 
         public MsgArg msgArg = null;
 
-        public MsgId()
+        public Msg()
         {
             msgId++;
         }
@@ -27,9 +27,9 @@ namespace GameFrame
    
     class MsgManager : Singleton<MsgManager>
     {   
-        Dictionary<MsgId, MsgCallback> m_msgDictionary = new Dictionary<MsgId, MsgCallback>();
+        Dictionary<Msg, MsgCallback> m_msgDictionary = new Dictionary<Msg, MsgCallback>();
 
-        public bool RegisterMsg(MsgId msgId, MsgCallback callback)
+        public bool RegisterMsg(Msg msgId, MsgCallback callback)
         {
             bool registered = false;
             
@@ -53,7 +53,7 @@ namespace GameFrame
             return registered;
         }
 
-        public bool UnRegisterMsg(MsgId msgId)
+        public bool UnRegisterMsg(Msg msgId)
         {
             bool registerResult = true;
 
@@ -81,7 +81,7 @@ namespace GameFrame
             return registerResult;
         }
        
-        public bool UnRegisterCallback(MsgId msgId, MsgCallback callback)
+        public bool UnRegisterCallback(Msg msgId, MsgCallback callback)
         {
             bool registerResult = true;
 
@@ -111,7 +111,7 @@ namespace GameFrame
             return registerResult;
         }
 
-        public bool DispatchMsg(MsgId msgId)
+        public bool DispatchMsg(Msg msgId)
         {
             bool dispachResult = true;
 
