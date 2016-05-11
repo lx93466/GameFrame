@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Collections;
 
 namespace GameFrame
@@ -22,8 +19,10 @@ namespace GameFrame
     {   
         Dictionary<MsgId, MsgCallback> m_msgDictionary = new Dictionary<MsgId, MsgCallback>();
 
-        public void RegisterMsg(MsgId msgId, MsgCallback callback)
+        public bool RegisterMsg(MsgId msgId, MsgCallback callback)
         {
+            bool registered = false;
+            
             if (msgId != null && callback != null)
             {
                 MsgCallback tempMsg = null;
@@ -35,12 +34,13 @@ namespace GameFrame
                 {
                     m_msgDictionary.Add(msgId, callback);
                 }
+                registered = true;
             }
             else
             {
                 Tools.AddError("RegisterMsg: msgId is null or callback is null");
             }
-           
+            return registered;
         }
 
         public bool UnRegisterMsg(MsgId msgId)

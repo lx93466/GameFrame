@@ -70,7 +70,7 @@ namespace GameFrame
               
                 m_stackOpenedUI.Push(uiType);
                
-                Tools.AddTip("Open UI:" + uiBase.m_file);
+                Tools.AddLog("Open UI:" + uiBase.m_file);
             }
             else
             {
@@ -102,7 +102,7 @@ namespace GameFrame
             }
             else
             {
-                Tools.AddTip("1.The closing UIType[" + uiType.ToString() + "] is not toppest UI,it can't be closed; \n" +
+                Tools.AddLog("1.The closing UIType[" + uiType.ToString() + "] is not toppest UI,it can't be closed; \n" +
                     "2.The closing UIType is none. " );
             }
         }

@@ -4,7 +4,7 @@ using GameFrame;
 
 class TestMsgDefine
 {
-    public static MsgId testMsgid;
+    public static MsgId testMsgid = new MsgId();
 }
 
 public class TestMsg : MonoBehaviour {

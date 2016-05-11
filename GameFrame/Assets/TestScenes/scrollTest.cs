@@ -73,6 +73,9 @@ public class scrollTest : MonoBehaviour {
      public void LockScreen()
      {
          Tools.LockScreen();
+
+         GameObject ob = GameObject.Find("Cube");
+         GameObject.Destroy(ob);
      }
 
      public void UnLockScreen()

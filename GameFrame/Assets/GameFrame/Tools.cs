@@ -15,15 +15,15 @@ namespace GameFrame
 
         public static void AddWarming(string warming)
         {
-            if (warming.Length != 0)
+            if (warming != null)
             {
                 Debug.LogWarning(warming);
             }         
         }
 
-        public static void AddTip(string Tip)
+        public static void AddLog(string Tip)
         {
-            if (Tip.Length != 0)
+            if (Tip != null)
             {
                 Debug.Log(Tip);
             }
@@ -31,7 +31,7 @@ namespace GameFrame
 
         public static void AddError(string error)
         {
-            if (error.Length != 0)
+            if (error != null)
             {
                 Debug.LogError(error);
             }           

@@ -2,6 +2,8 @@
 
 class GameApp : Singleton<GameApp>
 {
+    public Player m_player = new Player();
+
     public void StartGame()
     {
         GameSceneManager.GetInstance().OpenScene(SceneType.LoginScene);        
@@ -9,13 +11,9 @@ class GameApp : Singleton<GameApp>
 
     public void InitGame()
     {
-        GameApp app = GameApp.GetInstance();
-
-        app.InitManagers();
-
-        app.RegisterScenes();
-
-        app.RegisterUIs();
+        InitManagers();
+        RegisterScenes();
+        RegisterUIs();
     }
 
     private void RegisterUIs()
@@ -29,7 +27,6 @@ class GameApp : Singleton<GameApp>
     private void RegisterScenes()
     {
         GameSceneManager.GetInstance().RegisterScene(SceneType.LoginScene, LoginScene.GetInstance);
-
         GameSceneManager.GetInstance().RegisterScene(SceneType.MainScene, MainScene.GetInstance);
     }
 

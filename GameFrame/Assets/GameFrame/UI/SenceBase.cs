@@ -45,7 +45,7 @@ namespace GameFrame
 
         public void Open()
         {
-            Tools.AddTip("Load Scene:" + m_scenePath + "/" + m_sceneFile);
+            Tools.AddLog("Load Scene:" + m_scenePath + "/" + m_sceneFile);
 
             SceneManager.LoadScene(m_scenePath + "/" + m_sceneFile, m_loadSceneMode);
 
