@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections;
+using UnityEngine;
 
 namespace GameFrame
 {
@@ -7,13 +8,22 @@ namespace GameFrame
     {
         public int msgId = -9999999;
 
+        public MsgArg msgArg = null;
+
         public MsgId()
         {
             msgId++;
         }
     }
 
-    public delegate void MsgCallback(Hashtable args);   
+    public class MsgArg
+    {
+        public Vector4 v4;
+
+        public Object obj;
+    }
+
+    public delegate void MsgCallback(MsgArg args);   
    
     class MsgManager : Singleton<MsgManager>
     {   
@@ -101,7 +111,7 @@ namespace GameFrame
             return registerResult;
         }
 
-        public bool DispatchMsg(MsgId msgId, Hashtable hashtable = null)
+        public bool DispatchMsg(MsgId msgId)
         {
             bool dispachResult = true;
 
@@ -112,7 +122,7 @@ namespace GameFrame
                 {
                     if (tempMsg != null)
                     {
-                        tempMsg(hashtable);
+                        tempMsg(msgId.msgArg);
                     }
                     else
                     {

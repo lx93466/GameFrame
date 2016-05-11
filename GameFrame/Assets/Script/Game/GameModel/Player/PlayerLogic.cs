@@ -6,7 +6,7 @@ public class PlayerLogic : GameBehaviour {
 
     Vector3 m_velocity = new Vector3();
 
-    Hashtable args = new Hashtable();
+    MsgArg args = new Hashtable();
 
     void Update()
     {

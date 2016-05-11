@@ -21,12 +21,8 @@ public class PlayerDriveMoving : GameBehaviour
         RegisterMsg(PlayerMsg.moveMsg, Move);
     }
 
-    void Move(Hashtable args)
+    void Move(MsgArg args)
     {
-        m_hValue = Tools.ToFloat(args["H"].ToString());
-       
-        m_vValue = Tools.ToFloat(args["V"].ToString());
-
         m_velocity.x = m_vValue;
 
         m_velocity.z = m_hValue;

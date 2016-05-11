@@ -46,7 +46,7 @@ public class TestMsg : MonoBehaviour {
         MsgManager.GetInstance().UnRegisterMsg(TestMsgDefine.testMsgid);
     }
 
-    void MsgCallback1(Hashtable args)
+    void MsgCallback1(MsgArg args)
     {
         Debug.Log("MsgCallback1");
         if (args != null)
@@ -58,7 +58,7 @@ public class TestMsg : MonoBehaviour {
         }
     }
 
-    void MsgCallback2(Hashtable args)
+    void MsgCallback2(MsgArg args)
     {
         Debug.Log("MsgCallback2");
         if (args != null)

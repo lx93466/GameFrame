@@ -15,7 +15,7 @@ public class PlayerMovingAnimation : GameBehaviour
         RegisterMsg(PlayerMsg.standMsg, Stand);
     }
 
-    void Stand(Hashtable args)
+    void Stand(MsgArg args)
     {
         if (m_animator != null)
         {
@@ -23,7 +23,7 @@ public class PlayerMovingAnimation : GameBehaviour
         }
     }
 
-    void Move(Hashtable args)
+    void Move(MsgArg args)
     {
         if (m_animator != null)
         {

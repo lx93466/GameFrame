@@ -112,7 +112,7 @@ namespace GameFrame
             MsgManager.GetInstance().RegisterMsg(UIManagerMsgDefine.ClearOpenedUIMsg, ClearOpenedUITemp);
         }
 
-        public void ClearOpenedUITemp(Hashtable args)
+        public void ClearOpenedUITemp(MsgArg args)
         {
             m_stackOpenedUI.Clear();
           
