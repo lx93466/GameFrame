@@ -29,6 +29,8 @@ public class PlayerDriveMoving : GameBehaviour
 
         m_velocity.z = args.v4.z;
 
+       // m_velocity.y = m_rigidbody.velocity.y;
+
         m_rigidbody.velocity = m_velocity * m_player.m_speed;
 
         transform.rotation = Quaternion.LookRotation(args.v4);
