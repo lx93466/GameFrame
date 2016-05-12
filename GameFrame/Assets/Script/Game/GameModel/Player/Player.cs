@@ -8,5 +8,5 @@ public class PlayerMsg
 
 public class Player
 {
-    public int m_speed = 30;
+    public int m_speed = 20;
 }

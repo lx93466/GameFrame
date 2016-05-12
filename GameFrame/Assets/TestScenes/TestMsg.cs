@@ -49,24 +49,24 @@ public class TestMsg : MonoBehaviour {
     void MsgCallback1(MsgArg args)
     {
         Debug.Log("MsgCallback1");
-        if (args != null)
-        {
-            foreach (var key in args.Keys)
-            {
-                Debug.Log("(key, value) = (" + key + "," + args[key] + ")");
-            }
-        }
+        //if (args != null)
+        //{
+        //    foreach (var key in args.Keys)
+        //    {
+        //        Debug.Log("(key, value) = (" + key + "," + args[key] + ")");
+        //    }
+        //}
     }
 
     void MsgCallback2(MsgArg args)
     {
         Debug.Log("MsgCallback2");
-        if (args != null)
-        {
-            foreach (var key in args.Keys)
-            {
-                Debug.Log("(key, value) = (" + key + "," + args[key] + ")");
-            }
-        }
+        //if (args != null)
+        //{
+        //    foreach (var key in args.Keys)
+        //    {
+        //        Debug.Log("(key, value) = (" + key + "," + args[key] + ")");
+        //    }
+        //}
     }
 }

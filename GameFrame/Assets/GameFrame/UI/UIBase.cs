@@ -36,7 +36,7 @@ namespace GameFrame
 
         public UIType m_uiType;
 
-        private Dictionary<MsgId, MsgCallback> m_registeredMsgIds = new Dictionary<MsgId,MsgCallback>();
+        private Dictionary<Msg, MsgCallback> m_registeredMsgIds = new Dictionary<Msg,MsgCallback>();
 
         protected UIBase()
         {
@@ -218,7 +218,7 @@ namespace GameFrame
             m_root.gameObject.SetActive(true);
         }
 
-        protected void RegisterMsg(MsgId msgId, MsgCallback callback)
+        protected void RegisterMsg(Msg msgId, MsgCallback callback)
         {
             MsgManager.GetInstance().RegisterMsg(msgId, callback);
 

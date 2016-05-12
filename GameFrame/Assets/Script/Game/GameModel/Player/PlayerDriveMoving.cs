@@ -14,6 +14,8 @@ public class PlayerDriveMoving : GameBehaviour
 
     Player m_player = GameApp.GetInstance().m_player;
 
+    Vector3 m_relativePos = new Vector3(5, 10, 10);
+
     protected override void Init()
     {
         m_rigidbody = GetComponent<Rigidbody>();
@@ -23,10 +25,18 @@ public class PlayerDriveMoving : GameBehaviour
 
     void Move(MsgArg args)
     {
-        m_velocity.x = m_vValue;
+        m_velocity.x = args.v4.x;
 
-        m_velocity.z = m_hValue;
+        m_velocity.z = args.v4.z;
 
         m_rigidbody.velocity = m_velocity * m_player.m_speed;
+
+        transform.rotation = Quaternion.LookRotation(args.v4);
+        
+        args.v4 = transform.position + m_relativePos;
+
+        CameraFollowing.cameraMovingMsg.msgArg = args;
+
+        MsgManager.GetInstance().DispatchMsg(CameraFollowing.cameraMovingMsg);
     }
 }

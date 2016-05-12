@@ -6,7 +6,7 @@ namespace GameFrame
 {
     public class UIManagerMsgDefine
     {
-        public static MsgId ClearOpenedUIMsg = new MsgId();
+        public static Msg ClearOpenedUIMsg = new Msg();
     }
 
     public delegate UIBase GetUIInstanceDelegate();

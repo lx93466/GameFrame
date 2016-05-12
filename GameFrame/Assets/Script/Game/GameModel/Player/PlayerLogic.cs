@@ -4,9 +4,7 @@ using GameFrame;
 
 public class PlayerLogic : GameBehaviour {
 
-    Vector3 m_velocity = new Vector3();
-
-    MsgArg args = new Hashtable();
+    MsgArg args = new MsgArg();
 
     void Update()
     {
@@ -16,18 +14,15 @@ public class PlayerLogic : GameBehaviour {
        
         if (Mathf.Abs(h) > 0.05f || Mathf.Abs(v) > 0.05f)
         {
-            m_velocity.x = v;
+            args.v4 = new Vector4(-h, 0, -v);
 
-            m_velocity.y = h;
+            PlayerMsg.moveMsg.msgArg = args;
 
-            args.Add("H", h);
-            args.Add("V", v);
-
-            MsgManager.GetInstance().DispatchMsg(PlayerMsg.moveMsg, args);
+            MsgManager.GetInstance().DispatchMsg(PlayerMsg.moveMsg);
         }
         else
         {
-            MsgManager.GetInstance().DispatchMsg(PlayerMsg.standMsg, args);
+            MsgManager.GetInstance().DispatchMsg(PlayerMsg.standMsg);
         }
     }
 }

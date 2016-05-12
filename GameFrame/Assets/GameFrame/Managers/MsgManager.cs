@@ -6,7 +6,7 @@ namespace GameFrame
 {
     public class Msg
     {
-        public int msgId = -9999999;
+        public int msgId = 0;
 
         public MsgArg msgArg = null;
 
@@ -38,7 +38,8 @@ namespace GameFrame
                 MsgCallback tempMsg = null;
                 if (m_msgDictionary.TryGetValue(msgId, out tempMsg) == true)
                 {
-                    tempMsg += callback;
+                    //tempMsg += callback; //值传递，不能添加委托
+                    m_msgDictionary[msgId] += callback;//引用传递，能添加委托
                 }
                 else
                 {
