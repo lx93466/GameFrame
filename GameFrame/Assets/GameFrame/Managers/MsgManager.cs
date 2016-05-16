@@ -92,8 +92,6 @@ namespace GameFrame
              
                 if (m_msgDictionary.TryGetValue(msgId, out tempMsg) == true)           
                 {
-                   // tempMsg -= callback;
-                  
                     m_msgDictionary[msgId] -= callback;//引用传递，能添加委托
 
                     if (m_msgDictionary[msgId] == null)
@@ -130,7 +128,6 @@ namespace GameFrame
                     else
                     {
                         m_msgDictionary.Remove(msgId);
-
                         Tools.AddWarming("DispachMsg:要分发的消息回调不存在，已注销消息。");
                     }
                 }
