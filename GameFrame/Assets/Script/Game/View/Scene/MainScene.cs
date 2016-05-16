@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-using GameFrame;
+﻿using GameFrame;
 
 class MainScene : SceneBase
 {

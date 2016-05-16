@@ -20,7 +20,7 @@ namespace GameFrame
     {
         public Vector4 v4;
 
-        public Object obj;
+        public object obj;
     }
 
     public delegate void MsgCallback(MsgArg args);   
@@ -92,9 +92,11 @@ namespace GameFrame
              
                 if (m_msgDictionary.TryGetValue(msgId, out tempMsg) == true)           
                 {
-                    tempMsg -= callback;
-                    
-                    if (tempMsg == null)
+                   // tempMsg -= callback;
+                  
+                    m_msgDictionary[msgId] -= callback;//引用传递，能添加委托
+
+                    if (m_msgDictionary[msgId] == null)
                     {
                         UnRegisterMsg(msgId);
                     }                                    

@@ -8,7 +8,8 @@ public enum UIType
     LoginUI,
     RegisterUI,
     MainUI,
-    PersonalInfoUI
+    PersonalInfoUI,
+    BattleUI
 }
 
 /// <summary>
@@ -20,6 +21,8 @@ public enum SceneType
     // 登陆场景
     LoginScene,
     //游戏世界主场景
-    MainScene
+    MainScene,
+    //战斗场景
+    BattleScene
 }
 

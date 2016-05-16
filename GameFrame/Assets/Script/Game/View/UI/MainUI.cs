@@ -19,6 +19,8 @@ public class MainUI : UIBase
     protected override void AftertOpen()
     {
         RegisterUIEvent("LeftTop/HeadIcon", OnOpenPersonalInfo);
+
+        RegisterUIEvent("StartBattle", OnOpenBattleScene);
     }
 
     public static MainUI GetInstance()
@@ -29,5 +31,10 @@ public class MainUI : UIBase
     private void OnOpenPersonalInfo(PointerEventData data)
     {
         UIManager.GetInstance().OpenUI(UIType.PersonalInfoUI);
+    }
+
+    private void OnOpenBattleScene(PointerEventData data)
+    {
+        GameSceneManager.GetInstance().OpenScene(SceneType.BattleScene);
     }
 }

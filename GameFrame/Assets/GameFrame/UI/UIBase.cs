@@ -259,7 +259,7 @@ namespace GameFrame
                            
                             if (handlerData != null)
                             {
-                                Tools.GetComponent<UIEventListener>(btn.gameObject).onClick = handlerData;
+                                Tools.GetComponent<UIEventListener>(btn.gameObject).onClick += handlerData;
                             }
                             else
                             {
@@ -271,7 +271,7 @@ namespace GameFrame
                             
                             if (handlerData != null)
                             {
-                                Tools.GetComponent<UIEventListener>(btn.gameObject).onClickUp = handlerData;
+                                Tools.GetComponent<UIEventListener>(btn.gameObject).onClickUp += handlerData;
                             }
                             else
                             {
@@ -282,7 +282,7 @@ namespace GameFrame
                         case UIEventType.onClickDown:
                             if (handlerData != null)
                             {
-                                Tools.GetComponent<UIEventListener>(btn.gameObject).onClickDown = handlerData;
+                                Tools.GetComponent<UIEventListener>(btn.gameObject).onClickDown += handlerData;
                             }
                             else
                             {
@@ -294,7 +294,7 @@ namespace GameFrame
 
                             if (handlerData != null)
                             {
-                                Tools.GetComponent<UIEventListener>(btn.gameObject).onBeginDrag = handlerData;
+                                Tools.GetComponent<UIEventListener>(btn.gameObject).onBeginDrag += handlerData;
                             }
                             else
                             {
@@ -306,7 +306,7 @@ namespace GameFrame
 
                             if (handlerData != null)
                             {
-                                Tools.GetComponent<UIEventListener>(btn.gameObject).onDrag = handlerData;
+                                Tools.GetComponent<UIEventListener>(btn.gameObject).onDrag += handlerData;
                             }
                             else
                             {
@@ -318,7 +318,7 @@ namespace GameFrame
 
                             if (handlerData != null)
                             {
-                                Tools.GetComponent<UIEventListener>(btn.gameObject).onEndDrag = handlerData;
+                                Tools.GetComponent<UIEventListener>(btn.gameObject).onEndDrag += handlerData;
                             }
                             else
                             {
@@ -330,7 +330,7 @@ namespace GameFrame
 
                             if (handlerData != null)
                             {
-                                Tools.GetComponent<UIEventListener>(btn.gameObject).onDrop = handlerData;
+                                Tools.GetComponent<UIEventListener>(btn.gameObject).onDrop += handlerData;
                             }
                             else
                             {
@@ -342,7 +342,7 @@ namespace GameFrame
 
                             if (handlerV2 != null)
                             {
-                                Tools.GetComponent<UIEventListener>(btn.gameObject).onScroll = handlerV2;
+                                Tools.GetComponent<UIEventListener>(btn.gameObject).onScroll += handlerV2;
                             }
                             else
                             {

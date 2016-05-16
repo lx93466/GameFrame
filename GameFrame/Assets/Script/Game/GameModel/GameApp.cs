@@ -2,7 +2,7 @@
 
 class GameApp : Singleton<GameApp>
 {
-    public Player m_player = new Player();
+    public readonly Player m_player = new Player();
 
     public void StartGame()
     {
@@ -16,25 +16,27 @@ class GameApp : Singleton<GameApp>
         RegisterUIs();
     }
 
-    private void RegisterUIs()
+    private void InitManagers()
     {
-        UIManager.GetInstance().RegisterUI(UIType.LoginUI, LoginUI.GetInstance);
-        UIManager.GetInstance().RegisterUI(UIType.RegisterUI, RegisterUI.GetInstance);
-        UIManager.GetInstance().RegisterUI(UIType.MainUI, MainUI.GetInstance);
-        UIManager.GetInstance().RegisterUI(UIType.PersonalInfoUI, PersonalInfoUI.GetInstance);
+        ConfigManager.GetInstance().Init();
+        UIManager.GetInstance().Init();
+        TimerManager.GetInstance().Init();
     }
 
     private void RegisterScenes()
     {
         GameSceneManager.GetInstance().RegisterScene(SceneType.LoginScene, LoginScene.GetInstance);
         GameSceneManager.GetInstance().RegisterScene(SceneType.MainScene, MainScene.GetInstance);
+        GameSceneManager.GetInstance().RegisterScene(SceneType.BattleScene, BattleScene.GetInstance);
     }
 
-    private void InitManagers()
+    private void RegisterUIs()
     {
-        ConfigManager.GetInstance().Init();
-        UIManager.GetInstance().Init();
-        TimerManager.GetInstance().Init();
+        UIManager.GetInstance().RegisterUI(UIType.LoginUI, LoginUI.GetInstance);
+        UIManager.GetInstance().RegisterUI(UIType.RegisterUI, RegisterUI.GetInstance);
+        UIManager.GetInstance().RegisterUI(UIType.MainUI, MainUI.GetInstance);
+        UIManager.GetInstance().RegisterUI(UIType.PersonalInfoUI, PersonalInfoUI.GetInstance);
+        UIManager.GetInstance().RegisterUI(UIType.BattleUI, BattleUI.GetInstance);
     }
 }
 

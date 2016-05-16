@@ -25,6 +25,7 @@ public class PlayerMovingAnimation : GameBehaviour
 
     void Move(MsgArg args)
     {
+        Debug.Log("PlayerMovingAnimation: Move");
         if (m_animator != null)
         {
             m_animator.SetBool("standToRun", true);

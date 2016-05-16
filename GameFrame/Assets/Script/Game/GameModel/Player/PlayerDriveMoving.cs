@@ -10,7 +10,7 @@ public class PlayerDriveMoving : GameBehaviour
 
     float m_vValue = 0;
 
-    Vector3 m_velocity;
+    Vector3 m_velocity = Vector3.zero;
 
     Player m_player = GameApp.GetInstance().m_player;
 
@@ -25,13 +25,15 @@ public class PlayerDriveMoving : GameBehaviour
 
     void Move(MsgArg args)
     {
-        m_velocity.x = args.v4.x;
+        Debug.Log("Move:" + this);
 
-        m_velocity.z = args.v4.z;
+        m_velocity.x = args.v4.x * m_player.m_speed;
 
-       // m_velocity.y = m_rigidbody.velocity.y;
+        m_velocity.y = m_rigidbody.velocity.y;
 
-        m_rigidbody.velocity = m_velocity * m_player.m_speed;
+        m_velocity.z = args.v4.z * m_player.m_speed;
+
+        m_rigidbody.velocity = m_velocity;
 
         transform.rotation = Quaternion.LookRotation(args.v4);
         
@@ -40,5 +42,15 @@ public class PlayerDriveMoving : GameBehaviour
         CameraFollowing.cameraMovingMsg.msgArg = args;
 
         MsgManager.GetInstance().DispatchMsg(CameraFollowing.cameraMovingMsg);
+    }
+
+    protected override void Uninit()
+    {
+        base.Uninit();
+    }
+
+    void Update()
+    {
+       // Debug.Log("Update:" + this);
     }
 }

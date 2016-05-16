@@ -30,21 +30,21 @@ namespace GameFrame
                                IDragHandler,
                                IEndDragHandler
     {
-        public UIEventHandlePointerEventData onClick;
+        public UIEventHandlePointerEventData onClick = null;
 
-        public UIEventHandlePointerEventData onClickUp;
+        public UIEventHandlePointerEventData onClickUp = null;
 
-        public UIEventHandlePointerEventData onClickDown;
+        public UIEventHandlePointerEventData onClickDown = null;
 
-        public UIEventHandlePointerEventData onBeginDrag;
+        public UIEventHandlePointerEventData onBeginDrag = null;
 
-        public UIEventHandlePointerEventData onDrag;
+        public UIEventHandlePointerEventData onDrag = null;
 
-        public UIEventHandlePointerEventData onEndDrag;
+        public UIEventHandlePointerEventData onEndDrag = null;
 
-        public UIEventHandlePointerEventData onDrop;
+        public UIEventHandlePointerEventData onDrop = null;
 
-        public UIEventHandleVector2 onScroll;
+        public UIEventHandleVector2 onScroll = null;
 
         void start()
         {
