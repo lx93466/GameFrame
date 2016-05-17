@@ -21,17 +21,14 @@ namespace GameFrame
 
         private int m_timerID = 0;
 
-        public static Timer AddTimer()
+        public static Timer CreateTimer()
         {
             Timer timer = null;
 
             GameObject obj = Tools.CreatEmptyGameObject("Timer");
 
-
             if (obj != null)
             {
-                obj.name = "testTimer";
-
                 timer = obj.AddComponent<Timer>();            
             }
               
@@ -54,7 +51,9 @@ namespace GameFrame
 
                m_loop = loop;
 
-               gameObject.name = "Timer(" + m_callback.ToString() + ")";
+               gameObject.name = "Timer[timer id: " + m_timerID + "]";
+
+               Tools.AddLog("Registered timer: " + gameObject.name);
             }     
         }
 
@@ -68,10 +67,7 @@ namespace GameFrame
             if (m_callback != null)
             {
                 if (m_calcuTime - m_scheduleTime >= 0f)
-                {
-                    Debug.Log("m_calcuTime:" + m_calcuTime);
-                    Debug.Log("m_scheduleTime:" + m_scheduleTime);
-                   
+                {                 
                     m_callback();
 
                     m_calcuTime -= m_scheduleTime;

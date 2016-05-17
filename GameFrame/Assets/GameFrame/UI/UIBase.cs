@@ -75,6 +75,8 @@ namespace GameFrame
         protected virtual void Uninit()
         {          
             UnregisterMsg();
+           
+            ResourceManager.GetInstance().UnloadUnusedAssets();
         }
 
         private void InitBackgroud()
@@ -177,13 +179,15 @@ namespace GameFrame
             if (isDestroyRoot && m_root != null)
             {
                 GameObject.Destroy(m_root.gameObject);
+              
                 m_root = null;
+                
+                Uninit();                                 
             }
             else
             {
                 Hide();
             }
-            Uninit();                  
         }
         
         /// <summary>

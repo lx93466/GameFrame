@@ -11,11 +11,13 @@ namespace GameFrame
     {
         Dictionary<int, Timer> m_timers = new Dictionary<int, Timer>();//<TimerID, Timer>
 
+        int m_curTimerId = 1;
+
         public void Schedule(TimerCallback callback, int timerID = 0, float intervalTime = 1.0f, float delayTime = 0.0f, bool loop = true)
         {
             if (callback != null)
             {
-                Timer timer = Timer.AddTimer();
+                Timer timer = Timer.CreateTimer();
 
                 if (timerID == 0)
                 {
@@ -66,7 +68,7 @@ namespace GameFrame
 
         public int GetTimerID()
         {
-            return DateTime.Now.Millisecond;
+            return m_curTimerId ++;
         }
 
     }

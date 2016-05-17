@@ -62,7 +62,7 @@ namespace GameFrame
             if (onClick != null)
             {                                  
                 onClick(eventData );
-                Tools.AddLog("UIEvent: onClick. Target: " + eventData.pointerPress.name);
+                Tools.AddLog("UIEvent: onClick. Target: " + gameObject.name);
             }
         }
 
@@ -70,8 +70,9 @@ namespace GameFrame
         {
             if (onClickDown != null)
             {
+                eventData.pointerPress = gameObject;
                 onClickDown(eventData);
-                Tools.AddLog("UIEvent: onClickDown. Target: " + eventData.pointerPress.name);
+                Tools.AddLog("UIEvent: onClickDown. Target: " + gameObject.name);
             }
         }
 
@@ -81,7 +82,7 @@ namespace GameFrame
             if (onClickUp != null)
             {
                 onClickUp(eventData );
-                Tools.AddLog("UIEvent: onClickUp. Target: " + eventData.pointerPress.name);
+                Tools.AddLog("UIEvent: onClickUp. Target: " + gameObject.name);
             }
         }
 

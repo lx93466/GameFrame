@@ -58,6 +58,11 @@ namespace GameFrame
             }
             return go;
         }
+
+        public void UnloadUnusedAssets()
+        {
+            Resources.UnloadUnusedAssets();
+        }
     }
 }
 
