@@ -13,6 +13,8 @@ public class PlayerMovingAnimation : GameBehaviour
         RegisterMsg(PlayerMsg.moveMsg, Move);
 
         RegisterMsg(PlayerMsg.standMsg, Stand);
+
+        RegisterMsg(PlayerMsg.attack1Msg, Attack1);
     }
 
     void Stand(MsgArg args)
@@ -29,6 +31,15 @@ public class PlayerMovingAnimation : GameBehaviour
         if (m_animator != null)
         {
             m_animator.SetBool("standToRun", true);
+        }
+    }
+
+    void Attack1(MsgArg args)
+    {
+        Debug.Log("PlayerMovingAnimation: Attack1");
+        if (m_animator != null)
+        {
+            m_animator.SetTrigger("TriggerAtk1");
         }
     }
 }

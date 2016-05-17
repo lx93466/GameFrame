@@ -10,8 +10,11 @@ namespace GameFrame
 
         public MsgArg msgArg = null;
 
-        public Msg()
+        public string msgName = "";
+
+        public Msg(string name = "")
         {
+            msgName = name;
             msgId++;
         }
     }

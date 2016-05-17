@@ -1,7 +1,7 @@
 ﻿using GameFrame;
 
-class UIMsgDefine
+class UIMsg
 {
-    public static Msg UpdateUIMsg = new Msg();
+    public static Msg UpdateUIMsg = new Msg("UpdateUIMsg");
 }
 

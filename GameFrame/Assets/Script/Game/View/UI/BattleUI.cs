@@ -63,7 +63,8 @@ public class BattleUI : UIBase
     }
 
     private void OnSkill0(PointerEventData data)
-    {       
+    {
+    //    MsgManager.GetInstance().DispatchMsg(PlayerMsg.attack1Msg);
         Debug.Log("OnSkill0");
     }
 
