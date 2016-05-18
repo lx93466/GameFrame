@@ -25,8 +25,6 @@ public class PlayerDriveMoving : GameBehaviour
 
     void Move(MsgArg args)
     {
-        Debug.Log("Move:" + this);
-
         m_velocity.x = args.v4.x * m_player.m_speed;
 
         m_velocity.y = m_rigidbody.velocity.y;
@@ -39,9 +37,9 @@ public class PlayerDriveMoving : GameBehaviour
         
         args.v4 = transform.position + m_relativePos;
 
-        CameraFollowing.cameraMovingMsg.msgArg = args;
+     //   CameraFollowing.cameraMovingMsg.msgArg = args;
 
-        MsgManager.GetInstance().DispatchMsg(CameraFollowing.cameraMovingMsg);
+     //   MsgManager.GetInstance().DispatchMsg(CameraFollowing.cameraMovingMsg);
     }
 
     protected override void Uninit()

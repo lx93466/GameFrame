@@ -39,7 +39,8 @@ public class PlayerMovingAnimation : GameBehaviour
         Debug.Log("PlayerMovingAnimation: Attack1");
         if (m_animator != null)
         {
-            m_animator.SetTrigger("TriggerAtk1");
+            m_animator.SetTrigger("attack");
+            iTween.MoveBy(this.gameObject, Vector3.forward * 3, 0.4f);
         }
     }
 }

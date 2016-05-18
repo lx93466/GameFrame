@@ -4,17 +4,21 @@ using GameFrame;
 
 
 public class CameraFollowing : GameBehaviour {
-
-    public static Msg cameraMovingMsg = new Msg();
-
+    
+    Transform m_target = null;
+   
+    Vector3 m_relativePos = new Vector3(5, 10, 10);
+   
     protected override void Init()
     {
-        RegisterMsg(cameraMovingMsg, Moving);
-    }
-	
-    void Moving(MsgArg args)
-    {
-        transform.position = args.v4;
+        m_target = GameObject.Find("Player").GetComponent<Transform>();
     }
 
+    void Update()
+    {
+        if (m_target != null)
+        {
+            transform.position = m_target.position + m_relativePos;                     
+        }
+    }
 }

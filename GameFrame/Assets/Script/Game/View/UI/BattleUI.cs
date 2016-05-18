@@ -36,10 +36,10 @@ public class BattleUI : UIBase
 
     protected override void AftertOpen()
     {
-        RegisterUIEvent("Skill0", OnSkill0);
-        RegisterUIEvent("Skill1", OnSkill1);
-        RegisterUIEvent("Skill2", OnSkill2);
-        RegisterUIEvent("Skill3", OnSkill3);
+        RegisterUIEvent("Skill0", OnSkill0, null, UIEventType.onClickDown);
+        RegisterUIEvent("Skill1", OnSkill1, null, UIEventType.onClickDown);
+        RegisterUIEvent("Skill2", OnSkill2, null, UIEventType.onClickDown);
+        RegisterUIEvent("Skill3", OnSkill3, null, UIEventType.onClickDown);
 
         RegisterUIEvent("Skill0", ClickDown, null, UIEventType.onClickDown);
         RegisterUIEvent("Skill1", ClickDown, null, UIEventType.onClickDown);
@@ -64,7 +64,7 @@ public class BattleUI : UIBase
 
     private void OnSkill0(PointerEventData data)
     {
-    //    MsgManager.GetInstance().DispatchMsg(PlayerMsg.attack1Msg);
+        MsgManager.GetInstance().DispatchMsg(PlayerMsg.attack1Msg);
         Debug.Log("OnSkill0");
     }
 

@@ -171,7 +171,7 @@ ModelImporter:
     400162: Particle View 01 9
     4300000: ce01_leg01
     4300002: lod1
-    7400000: man_attk
+    7400000: Attack2
     9500000: //RootNode
     13700000: ce01_leg01
     13700002: lod1
@@ -197,7 +197,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: man_attk
+      name: Attack2
       takeName: Take 001
       firstFrame: 0
       lastFrame: 42
@@ -219,7 +219,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.04029304
+        functionName: AttackEffect
+        data: attack2
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1
