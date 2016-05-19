@@ -13,18 +13,18 @@ class PlayerAttackEffect : GameBehaviour
 
         m_attackEffect1 = transform.Find("Attack1Effect").GetComponent<Effect>();
         m_attackEffect2 = transform.Find("Attack2Effect").GetComponent<Effect>();
-
     }
 
     void AttackEffect(string effect)
     {
-        Debug.Log(effect);
         if (effect == "attack1" && m_attackEffect1)
         {
+            m_attackEffect1.gameObject.SetActive(true);
             m_attackEffect1.ShowEffect();
         }
         else if (effect == "attack2" && m_attackEffect2)
         {
+            m_attackEffect2.gameObject.SetActive(true);
             m_attackEffect2.ShowEffect();
         }
     }

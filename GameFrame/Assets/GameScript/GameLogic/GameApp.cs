@@ -2,7 +2,7 @@
 
 class GameApp : Singleton<GameApp>
 {
-    public readonly Player m_player = new Player();
+    public Player m_player = new Player();
 
     public void StartGame()
     {

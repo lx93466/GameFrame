@@ -1,6 +1,6 @@
 ﻿using GameFrame;
 
-public class Player
+public class Role : GameBehaviour
 {
     public float m_attackDistance = 1;//攻击距离
     public int m_hp = 200;//血量
