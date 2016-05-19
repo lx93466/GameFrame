@@ -11,7 +11,7 @@ public class CameraFollowing : GameBehaviour {
    
     protected override void Init()
     {
-        m_target = GameObject.Find("Player").GetComponent<Transform>();
+        m_target = GameObject.Find("Hero").GetComponent<Transform>();
     }
 
     void Update()

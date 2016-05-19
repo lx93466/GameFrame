@@ -6,17 +6,17 @@ public class BattleController : Singleton<BattleController>
 {
     public HashSet<Transform> m_enermiesTransform = new HashSet<Transform>();
 
-    public Transform m_playerTransform = null;
+    public Transform m_heroTransform = null;
 
-    HashSet<Transform> PlayerGetAttackableEnermies(AttackDirection direction = AttackDirection.Forward)
+    public HashSet<Transform> HeroGetAttackableEnermies(AttackDirection direction = AttackDirection.Forward)
     {
         HashSet<Transform> enermies = new HashSet<Transform>();
 
-        if (m_playerTransform != null)
+        if (m_heroTransform != null)
         {
             foreach (var enermy in m_enermiesTransform)
             {
-                Vector3 pos = m_playerTransform.InverseTransformPoint(enermy.transform.position);
+                Vector3 pos = m_heroTransform.InverseTransformPoint(enermy.transform.position);
                
                 float distance = Vector3.Distance(Vector3.zero, pos);
                
@@ -24,7 +24,7 @@ public class BattleController : Singleton<BattleController>
                 {
                     if (pos.z > 0)
                     {
-                        if (distance < GameApp.GetInstance().m_player.m_attackDistance)
+                        if (distance < GameApp.GetInstance().m_hero.m_attackDistance)
                         {
                             enermies.Add(enermy);
                         }
@@ -32,7 +32,7 @@ public class BattleController : Singleton<BattleController>
                 }
                 else if (direction == AttackDirection.Around)
                 {
-                    if (distance < GameApp.GetInstance().m_player.m_attackDistance)//当前玩家只有一个英雄
+                    if (distance < GameApp.GetInstance().m_hero.m_attackDistance)//当前玩家只有一个英雄
                     {
                         enermies.Add(enermy);
                     }
@@ -42,13 +42,13 @@ public class BattleController : Singleton<BattleController>
         return enermies;
     }
 
-    Transform EnermyGetAttackablePlayer(Transform enermyTransform, AttackDirection direction = AttackDirection.Forward)
+    public Transform EnermyGetAttackableHero(Transform enermyTransform, AttackDirection direction = AttackDirection.Forward)
     {
-        Transform player = null;
+        Transform hero = null;
 
-        if (enermyTransform != null && m_playerTransform != null)
+        if (enermyTransform != null && m_heroTransform != null)
         {
-            Vector3 pos = enermyTransform.InverseTransformPoint(m_playerTransform.transform.position);
+            Vector3 pos = enermyTransform.InverseTransformPoint(m_heroTransform.transform.position);
                
             float distance = Vector3.Distance(Vector3.zero, pos);
                
@@ -56,21 +56,21 @@ public class BattleController : Singleton<BattleController>
             {
                 if (pos.z > 0)
                 {
-                    if (distance < enermyTransform.GetComponent<Enermy>().m_attackDistance)
+                    if (distance < enermyTransform.GetComponent<BattleAttributes>().m_attackDistance)
                     {
-                        player = m_playerTransform;
+                        hero = m_heroTransform;
                     }
 
                 }
             }
             else if (direction == AttackDirection.Around)
             {
-                if (distance < enermyTransform.GetComponent<Enermy>().m_attackDistance)
+                if (distance < enermyTransform.GetComponent<BattleAttributes>().m_attackDistance)
                 {
-                    player = m_playerTransform;
+                    hero = m_heroTransform;
                 }
             }           
         }
-        return player;
+        return hero;
     }
 }

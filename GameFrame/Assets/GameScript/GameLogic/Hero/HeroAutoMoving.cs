@@ -3,7 +3,7 @@ using System.Collections;
 using GameFrame;
 using System;
 
-public class PlayerAutoMoving : GameBehaviour
+public class HeroAutoMoving : GameBehaviour
 {
     Animator m_animator = null;
 
@@ -11,7 +11,7 @@ public class PlayerAutoMoving : GameBehaviour
     {
         m_animator = GetComponent<Animator>();
 
-        RegisterMsg(PlayerMsg.moveMsg, Move);
+        RegisterMsg(HeroMsg.heroMoveMsg, Move);
     }
 
     void Move(Hashtable args)

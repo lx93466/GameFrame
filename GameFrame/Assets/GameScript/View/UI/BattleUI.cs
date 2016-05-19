@@ -2,6 +2,7 @@
 using GameFrame;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Collections;
 
 public class BattleUI : UIBase
 {
@@ -64,8 +65,10 @@ public class BattleUI : UIBase
 
     private void OnSkill0(PointerEventData data)
     {
-        MsgManager.GetInstance().DispatchMsg(PlayerMsg.attackMsg);
-        Debug.Log("OnSkill0");
+        //普通攻击，在特效中发送攻击消息，原因：普通攻击分单次攻击和连续两连击，只有特效触发函数能区分
+        Hashtable arg = new Hashtable();
+        arg["attackType"] = HeroAttackType.Attack1;
+        MsgManager.GetInstance().DispatchMsg(HeroMsg.heroAttackMsg, arg); 
     }
 
     private void OnSkill1(PointerEventData data)
@@ -78,11 +81,17 @@ public class BattleUI : UIBase
                 Debug.Log("The skill is colding.");
             }
             else if(filedCount < 0.001)
-            {
+            {  
+                //技能冷却
                 m_curColdTime1 = 0;
                 m_filledSkill1.GetComponent<Image>().fillAmount = 1;
                 m_timerId1 = m_timerManager.GetTimerID();
                 m_timerManager.Schedule(ColdSkill1, m_timerId1, 0.05f);
+               
+                //触发攻击敌人逻辑
+                Hashtable arg = new Hashtable();
+                arg["attackType"] = HeroAttackType.Skill1;
+                MsgManager.GetInstance().DispatchMsg(HeroMsg.heroAttackMsg, arg);
             }           
         }
     } 
@@ -102,6 +111,11 @@ public class BattleUI : UIBase
                 m_filledSkill2.GetComponent<Image>().fillAmount = 1;
                 m_timerId2 = m_timerManager.GetTimerID();
                 m_timerManager.Schedule(ColdSkill2, m_timerId2, 0.05f);
+
+                //触发攻击敌人逻辑
+                Hashtable arg = new Hashtable();
+                arg["attackType"] = HeroAttackType.Skill2;
+                MsgManager.GetInstance().DispatchMsg(HeroMsg.heroAttackMsg, arg);
             }
         }
     }
@@ -121,6 +135,11 @@ public class BattleUI : UIBase
                 m_filledSkill3.GetComponent<Image>().fillAmount = 1;
                 m_timerId3 = m_timerManager.GetTimerID();
                 m_timerManager.Schedule(ColdSkill3, m_timerId3, 0.05f);
+
+                //触发攻击敌人逻辑
+                Hashtable arg = new Hashtable();
+                arg["attackType"] = HeroAttackType.Skill3;
+                MsgManager.GetInstance().DispatchMsg(HeroMsg.heroAttackMsg, arg);
             }
         }
     }
@@ -197,12 +216,10 @@ public class BattleUI : UIBase
     private void ClickDown(PointerEventData data)
     {
         data.pointerPress.transform.localScale = new Vector3(1, 1, 1) * 1.1f;
-        Debug.Log(data.pointerPress.transform.localScale);
     }
 
     private void ClickUp(PointerEventData data)
     {
         data.pointerPress.transform.localScale = new Vector3(1, 1, 1);
-        Debug.Log(data.pointerPress.transform.localScale);
     }
 }

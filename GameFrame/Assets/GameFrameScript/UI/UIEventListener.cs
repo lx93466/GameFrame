@@ -62,7 +62,6 @@ namespace GameFrame
             if (onClick != null)
             {                                  
                 onClick(eventData );
-                Tools.AddLog("UIEvent: onClick. Target: " + gameObject.name);
             }
         }
 
@@ -72,7 +71,6 @@ namespace GameFrame
             {
                 eventData.pointerPress = gameObject;
                 onClickDown(eventData);
-                Tools.AddLog("UIEvent: onClickDown. Target: " + gameObject.name);
             }
         }
 
@@ -82,7 +80,6 @@ namespace GameFrame
             if (onClickUp != null)
             {
                 onClickUp(eventData );
-                Tools.AddLog("UIEvent: onClickUp. Target: " + gameObject.name);
             }
         }
 
@@ -91,7 +88,6 @@ namespace GameFrame
             if (onDrag != null)
             {
                 onBeginDrag(eventData);
-                Tools.AddLog("UIEvent: OnBeginDrag. Target: " + eventData.pointerDrag.name);
             }
         }
 
@@ -100,7 +96,6 @@ namespace GameFrame
             if (onDrag != null)
             {
                 onDrag(eventData);
-                Tools.AddLog("UIEvent: onDrag. Target: " + eventData.pointerDrag.name);
             }
         }
 
@@ -109,7 +104,6 @@ namespace GameFrame
             if (onEndDrag != null)
             {
                 onEndDrag(eventData);
-                Tools.AddLog("UIEvent: OnEndDrag. Target: " + eventData.pointerDrag.name);
             }
         }
         /// <summary>
@@ -122,7 +116,6 @@ namespace GameFrame
             if (onDrop != null)
             {
                 onDrop(eventData);
-                Tools.AddLog("UIEvent: OnEndDrag. Target: " + eventData.pointerPress.name);
             }
         }
 
@@ -131,7 +124,6 @@ namespace GameFrame
             if (onScroll != null)
             {
                 onScroll(v2);
-                Tools.AddLog("UIEvent: OnScroll. Position: " + v2);
             }
         }
     }

@@ -1,12 +1,12 @@
 ﻿using GameFrame;
 
-enum AttackDirection
+public enum AttackDirection
 {
     Forward,//攻击前方
     Around//攻击四周
 }
 
-enum PlayerAttackType
+public enum HeroAttackType
 {
     Attack1,  //第一次攻击 
     Attack2,  //第二次连击
@@ -15,7 +15,7 @@ enum PlayerAttackType
     Skill3    //技能3攻击
 }
 
-public class Player
+public class Hero
 {
     public float m_attackDistance = 1;//攻击距离
     public int m_hp = 200;//血量

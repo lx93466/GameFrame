@@ -77,6 +77,11 @@ namespace GameFrame
             return t;
         }
 
+        public static void AddComponent<T>(GameObject gameObject) where T : MonoBehaviour
+        {
+            GetComponent<T>(gameObject);
+        }
+
         /// <summary>
         /// 锁屏、解锁屏
         /// </summary>
