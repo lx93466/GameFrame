@@ -4,8 +4,6 @@ using GameFrame;
 
 public class PlayerLogic : GameBehaviour {
 
-    PlayerAttackEffect m_attack1Effect = null;
-
     MsgArg args = new MsgArg();
 
     protected override void Init()

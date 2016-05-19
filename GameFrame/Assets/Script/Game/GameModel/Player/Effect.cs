@@ -16,10 +16,16 @@ public class Effect : GameBehaviour
         m_curveAnimArray = this.GetComponentsInChildren<NcCurveAnimation>();
      
         m_rendererArray = GetComponentsInChildren<Renderer>();
+
+        gameObject.SetActive(false);
     }
 
     public void ShowEffect()
     {
+        if (gameObject.activeSelf == false)
+        {
+            gameObject.SetActive(true);
+        }
         if (m_curveAnimArray != null)
         {
             foreach (NcCurveAnimation anim in m_curveAnimArray)
