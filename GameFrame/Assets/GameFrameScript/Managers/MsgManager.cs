@@ -8,7 +8,7 @@ namespace GameFrame
     {
         public int msgId = 0;
 
-        public MsgArg msgArg = null;
+        public Hashtable Hashtable = null;
 
         public string msgName = "";
 
@@ -19,14 +19,7 @@ namespace GameFrame
         }
     }
 
-    public class MsgArg
-    {
-        public Vector4 v4;
-
-        public object obj;
-    }
-
-    public delegate void MsgCallback(MsgArg args);   
+    public delegate void MsgCallback(Hashtable args);   
    
     class MsgManager : Singleton<MsgManager>
     {   
@@ -115,7 +108,7 @@ namespace GameFrame
             return registerResult;
         }
 
-        public bool DispatchMsg(Msg msgId)
+        public bool DispatchMsg(Msg msgId, Hashtable args = null)
         {
             bool dispachResult = true;
 
@@ -126,7 +119,7 @@ namespace GameFrame
                 {
                     if (tempMsg != null)
                     {
-                        tempMsg(msgId.msgArg);
+                        tempMsg(args);
                     }
                     else
                     {

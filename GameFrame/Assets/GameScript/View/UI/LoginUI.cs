@@ -39,7 +39,7 @@ public class LoginUI : UIBase
         UIManager.GetInstance().OpenUI(UIType.RegisterUI);
     }
 
-    private void UpdateUI(MsgArg args = null)
+    private void UpdateUI(Hashtable args = null)
     {
         if (m_root != null && IsVisible())
 	    {

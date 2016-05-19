@@ -23,23 +23,20 @@ public class PlayerDriveMoving : GameBehaviour
         RegisterMsg(PlayerMsg.moveMsg, Move);
     }
 
-    void Move(MsgArg args)
+    void Move(Hashtable args)
     {
-        m_velocity.x = args.v4.x * m_player.m_speed;
+        if (args != null)
+        {
+            m_velocity.x = (float)args["x"] * m_player.m_speed;
 
-        m_velocity.y = m_rigidbody.velocity.y;
+            m_velocity.y = m_rigidbody.velocity.y;
 
-        m_velocity.z = args.v4.z * m_player.m_speed;
+            m_velocity.z = (float)args["z"] * m_player.m_speed;
 
-        m_rigidbody.velocity = m_velocity;
+            m_rigidbody.velocity = m_velocity;
 
-        transform.rotation = Quaternion.LookRotation(args.v4);
-        
-        args.v4 = transform.position + m_relativePos;
-
-     //   CameraFollowing.cameraMovingMsg.msgArg = args;
-
-     //   MsgManager.GetInstance().DispatchMsg(CameraFollowing.cameraMovingMsg);
+            transform.rotation = Quaternion.LookRotation(m_velocity);
+        }     
     }
 
     protected override void Uninit()

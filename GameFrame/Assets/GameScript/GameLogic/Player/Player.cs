@@ -1,5 +1,20 @@
 ﻿using GameFrame;
 
+enum AttackDirection
+{
+    Forward,//攻击前方
+    Around//攻击四周
+}
+
+enum PlayerAttackType
+{
+    Attack1,  //第一次攻击 
+    Attack2,  //第二次连击
+    Skill1,   //技能1攻击
+    Skill2,   //技能2攻击
+    Skill3    //技能3攻击
+}
+
 public class Player
 {
     public float m_attackDistance = 1;//攻击距离

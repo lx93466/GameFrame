@@ -14,7 +14,7 @@ public class PlayerAutoMoving : GameBehaviour
         RegisterMsg(PlayerMsg.moveMsg, Move);
     }
 
-    void Move(MsgArg args)
+    void Move(Hashtable args)
     {
      
     }

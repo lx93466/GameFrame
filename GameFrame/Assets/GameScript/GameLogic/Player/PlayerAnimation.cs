@@ -2,7 +2,7 @@
 using System.Collections;
 using GameFrame;
 
-public class PlayerMovingAnimation : GameBehaviour
+public class PlayerAnimation : GameBehaviour
 {
     Animator m_animator = null;
     
@@ -14,10 +14,10 @@ public class PlayerMovingAnimation : GameBehaviour
 
         RegisterMsg(PlayerMsg.standMsg, Stand);
 
-        RegisterMsg(PlayerMsg.attack1Msg, Attack1);
+        RegisterMsg(PlayerMsg.attackMsg, Attack1);
     }
 
-    void Stand(MsgArg args)
+    void Stand(Hashtable args)
     {
         if (m_animator != null)
         {
@@ -25,7 +25,7 @@ public class PlayerMovingAnimation : GameBehaviour
         }
     }
 
-    void Move(MsgArg args)
+    void Move(Hashtable args)
     {
         Debug.Log("PlayerMovingAnimation: Move");
         if (m_animator != null)
@@ -34,7 +34,7 @@ public class PlayerMovingAnimation : GameBehaviour
         }
     }
 
-    void Attack1(MsgArg args)
+    void Attack1(Hashtable args)
     {
         Debug.Log("PlayerMovingAnimation: Attack1");
         if (m_animator != null)
