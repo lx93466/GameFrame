@@ -17,10 +17,26 @@ public class HeroDriveMoving : GameBehaviour
         m_rigidbody = GetComponent<Rigidbody>();
     }
 
-    void Move(Vector3 speed)
-    {      
-        m_rigidbody.velocity = speed * m_hero.m_speed;
+    public void Move()
+    {
+        float h = Input.GetAxis("Horizontal");
 
-        transform.rotation = Quaternion.LookRotation(m_velocity);         
+        float v = Input.GetAxis("Vertical");
+
+        if (Mathf.Abs(h) > 0.05f || Mathf.Abs(v) > 0.05f)
+        {
+            m_velocity.x = -h * GameApp.GetInstance().m_hero.m_speed;
+            m_velocity.z = -v * GameApp.GetInstance().m_hero.m_speed;
+            transform.rotation = Quaternion.LookRotation(m_velocity);
+            m_velocity.y = m_rigidbody.velocity.y;
+            m_rigidbody.velocity = m_velocity;
+
+        }      
+    }
+
+    public void StopMove()
+    {
+        m_rigidbody.velocity = Vector3.zero;
+
     }
 }

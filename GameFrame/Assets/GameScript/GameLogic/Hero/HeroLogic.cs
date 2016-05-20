@@ -14,6 +14,7 @@ public class HeroLogic : GameBehaviour {
     HeroDriveMoving m_heroDriveMoving = null;
     HeroAutoMoving m_heroAutoMoving = null;
     BattleAttributes m_battleAttributes = null;
+  
     protected override void Init()
     {
         base.Init();
@@ -47,28 +48,32 @@ public class HeroLogic : GameBehaviour {
        
         if (Mathf.Abs(h) > 0.05f || Mathf.Abs(v) > 0.05f)
         {
-            m_velocity.x = -h * GameApp.GetInstance().m_hero.m_speed;
-            m_velocity.z = -v * GameApp.GetInstance().m_hero.m_speed;
-            transform.rotation = Quaternion.LookRotation(m_velocity);
-            m_velocity.y = m_rigidbody.velocity.y;
-            m_rigidbody.velocity = m_velocity;
+            m_heroDriveMoving.Move();
 
             m_heroAnimation.MoveAnimation();
         }
         else
         {
-            m_rigidbody.velocity = Vector3.zero;
+            m_heroDriveMoving.StopMove();
+
             m_heroAnimation.StandAnimation();
         }
     }
 
     void AttackCallBack(Hashtable arg)
     {
-        HeroAttackType attackType = (HeroAttackType)arg["attackType"];
+        if (arg != null && arg.ContainsKey("attackType"))//普通攻击时，没有攻击类型
+        {
+            HeroAttackType attackType = (HeroAttackType)arg["attackType"];
 
-        AttackEnermies(attackType);
-        m_heroAnimation.AttackAnimation(attackType);
-        m_heroAttackEffect.SkillEffect(attackType);
+            AttackEnermies(attackType);
+            m_heroAnimation.AttackAnimation(attackType);
+            m_heroAttackEffect.SkillEffect(attackType);
+        }
+        else//普通攻击，只触发普通攻击动画播放，在特效中，再发送攻击函数，包含普通攻击类型。
+        {
+            m_heroAnimation.AttackAnimation(HeroAttackType.None);
+        }
     }
     /// <summary>
     /// 攻击敌人

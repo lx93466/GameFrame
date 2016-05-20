@@ -4,11 +4,20 @@ using GameFrame;
 
 public class EnermyLogic : GameBehaviour
 {
+    EnermyAnimation m_enermyAnimation = null;
+    BattleAttributes m_battleAttributes = null;
+
+    float m_attackTime = 0;//距离上次攻击时间
+    
     protected override void Init()
     {
         base.Init();
+
+        m_battleAttributes = Tools.GetComponent<BattleAttributes>(gameObject);
+        m_enermyAnimation = Tools.GetComponent<EnermyAnimation>(gameObject);
+
         BattleController.GetInstance().m_enermiesTransform.Add(transform);
-        Tools.GetComponent<BattleAttributes>(gameObject).Init(1f, 200, 3, 10);
+        m_battleAttributes.Init(4f, 200, 3, 10);
 
     }
     protected override void Uninit()
@@ -16,14 +25,26 @@ public class EnermyLogic : GameBehaviour
         base.Uninit();
         BattleController.GetInstance().m_enermiesTransform.Remove(transform);
     }
-    void Attack()
+    
+    //攻击
+    void Attack(Transform heroTransform)
     {
-        Transform heroTransform = BattleController.GetInstance().EnermyGetAttackableHero(transform);
-        if (heroTransform)
+        if (heroTransform != null)
         {
             HeroLogic heroLogic = heroTransform.GetComponent<HeroLogic>();
             heroLogic.BeAttacked(transform.GetComponent<BattleAttributes>());
+
+            m_enermyAnimation.AttackAnimation();
+
+            Vector3 pos = heroTransform.position;
+            pos.y = 0;
+            transform.rotation = Quaternion.LookRotation(transform.InverseTransformPoint(pos));
         }
+    }
+
+    void Idle()
+    {
+      //  m_enermyAnimation.StandAnimation();
     }
 
     public void BeAttacked(BattleAttributes heroAttributes, HeroAttackType attackType = HeroAttackType.Attack1)
@@ -53,5 +74,21 @@ public class EnermyLogic : GameBehaviour
             }
 
         }
+    }
+
+    void Update()
+    {
+        m_attackTime += Time.deltaTime;
+
+        if (m_attackTime > m_battleAttributes.m_attackTime)
+        {
+            m_attackTime = 0f;
+            
+            Transform heroTransform = BattleController.GetInstance().EnermyGetAttackableHero(transform);
+            if (heroTransform != null)
+            {
+                Attack(heroTransform);
+            }
+        }            
     }
 }

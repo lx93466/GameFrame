@@ -65,10 +65,8 @@ public class BattleUI : UIBase
 
     private void OnSkill0(PointerEventData data)
     {
-        //普通攻击，在特效中发送攻击消息，原因：普通攻击分单次攻击和连续两连击，只有特效触发函数能区分
-        Hashtable arg = new Hashtable();
-        arg["attackType"] = HeroAttackType.Attack1;
-        MsgManager.GetInstance().DispatchMsg(HeroMsg.heroAttackMsg, arg); 
+        //普通攻击，此处没有攻击类型，因为无法判定。在特效回调中还会发送攻击消息，原因：可以判定攻击类型。普通攻击分单次攻击和连续两连击，只有特效触发函数能区分      
+        MsgManager.GetInstance().DispatchMsg(HeroMsg.heroAttackMsg); 
     }
 
     private void OnSkill1(PointerEventData data)

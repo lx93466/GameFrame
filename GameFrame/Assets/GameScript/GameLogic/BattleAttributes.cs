@@ -8,6 +8,8 @@ public class BattleAttributes : GameBehaviour
     public int m_hp = 0;//血量
     public int m_speed = 0; //速度
     public int m_attackDamage = 0; //攻击伤害
+    public float m_attackTime = 2;//隔多少秒攻击一次
+
     //技能伤害
     public int m_skill1Damage = 0;
     public int m_skill2Damage = 0;

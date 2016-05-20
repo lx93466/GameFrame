@@ -69,7 +69,7 @@ ModelImporter:
     400062: FlowerMonster
     4300000: Cylinder001
     4300002: FlowerMonster
-    7400000: walk
+    7400000: FlowerWalk
     9500000: //RootNode
     11100000: //RootNode
     13700000: Cylinder001
@@ -88,7 +88,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -96,7 +96,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: walk
+      name: FlowerWalk
       takeName: Take 001
       firstFrame: 0
       lastFrame: 40
@@ -106,7 +106,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -160,7 +160,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 1
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 1
   userData: 

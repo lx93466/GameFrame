@@ -66,7 +66,7 @@ ModelImporter:
     400058: RigTeethRight
     400060: RigTeethUp
     4300000: FlowerMonster
-    7400000: idle
+    7400000: FlowerIdle
     9500000: //RootNode
     11100000: //RootNode
     13700000: FlowerMonster
@@ -84,7 +84,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -92,7 +92,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: idle
+      name: FlowerIdle
       takeName: Take 001
       firstFrame: 0
       lastFrame: 40
@@ -156,7 +156,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 1
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 1
   userData: 

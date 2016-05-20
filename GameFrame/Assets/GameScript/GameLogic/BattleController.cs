@@ -49,14 +49,15 @@ public class BattleController : Singleton<BattleController>
         if (enermyTransform != null && m_heroTransform != null)
         {
             Vector3 pos = enermyTransform.InverseTransformPoint(m_heroTransform.transform.position);
-               
-            float distance = Vector3.Distance(Vector3.zero, pos);
+
+            float distance = Vector3.Distance(enermyTransform.position, m_heroTransform.transform.position);
                
             if (direction == AttackDirection.Forward)
             {
                 if (pos.z > 0)
                 {
-                    if (distance < enermyTransform.GetComponent<BattleAttributes>().m_attackDistance)
+                    float attackDistance = enermyTransform.GetComponent<BattleAttributes>().m_attackDistance;
+                    if (distance < attackDistance)
                     {
                         hero = m_heroTransform;
                     }
