@@ -88,7 +88,7 @@ namespace GameFrame
        /// <param name="motionName">状态机对应motion名称</param>
        /// <param name="fnName">事件调用函数名称</param>
        /// <param name="triggerTime">事件触发时间：triggerTime < 0 | triggerTime > 动画播放最长时间 时，事件添加在动画播放结束时</param>
-       /// <param name="args">事件触发是的参数</param>
+       /// <param name="args">事件触发时的参数</param>
         public static void AddAnimatorEvent(Animator animator, string motionName, string fnName, float triggerTime = -1f, string args = "")
         {
             if (animator != null && motionName != null && motionName.Length > 0 && fnName != null && fnName.Length > 0)
