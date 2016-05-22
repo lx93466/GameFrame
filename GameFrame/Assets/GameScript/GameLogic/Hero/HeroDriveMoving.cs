@@ -30,7 +30,6 @@ public class HeroDriveMoving : GameBehaviour
             transform.rotation = Quaternion.LookRotation(m_velocity);
             m_velocity.y = m_rigidbody.velocity.y;
             m_rigidbody.velocity = m_velocity;
-
         }      
     }
 

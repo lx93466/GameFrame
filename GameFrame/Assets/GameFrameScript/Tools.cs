@@ -81,7 +81,51 @@ namespace GameFrame
         {
             GetComponent<T>(gameObject);
         }
+       /// <summary>
+       /// 给动画添加事件
+       /// </summary>
+       /// <param name="animator">动画实例</param>
+       /// <param name="motionName">状态机对应motion名称</param>
+       /// <param name="fnName">事件调用函数名称</param>
+       /// <param name="triggerTime">事件触发时间：triggerTime < 0 | triggerTime > 动画播放最长时间 时，事件添加在动画播放结束时</param>
+       /// <param name="args">事件触发是的参数</param>
+        public static void AddAnimatorEvent(Animator animator, string motionName, string fnName, float triggerTime = -1f, string args = "")
+        {
+            if (animator != null && motionName != null && motionName.Length > 0 && fnName != null && fnName.Length > 0)
+            {
 
+                AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
+
+                for (int i = 0; i < clips.Length; i++)
+                {                  
+                    AnimationClip clip = clips[i];
+                    if (clip.name == motionName)
+                    {
+                        //计算事件触发时间
+                        if (triggerTime < 0 || triggerTime > clip.length)
+                        {
+                            triggerTime = clip.length;
+                        }
+
+                        //判断待添加事件是否已经存在，若存在，则不重复添加
+                        AnimationEvent[] existedEvents = clip.events;
+                        for (int j = 0; j < existedEvents.Length; j++)
+                        {
+                            AnimationEvent existedEvent = existedEvents[j];
+                            if (existedEvent.functionName == fnName && existedEvent.time == triggerTime)
+                            {
+                                return;
+                            }
+                        }
+                        //添加事件
+                        AnimationEvent animationEvent = new AnimationEvent();
+                        animationEvent.functionName = fnName;
+                        animationEvent.time = triggerTime;
+                        clip.AddEvent(animationEvent);
+                    }
+                }
+            }
+        }
         /// <summary>
         /// 锁屏、解锁屏
         /// </summary>
@@ -101,7 +145,6 @@ namespace GameFrame
                     Tools.AddWarming("Lock Screen Failed.");
                 }
             }
-
         }
     
         public static void UnlockScreen()

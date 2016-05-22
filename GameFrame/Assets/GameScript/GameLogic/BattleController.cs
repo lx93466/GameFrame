@@ -51,7 +51,7 @@ public class BattleController : Singleton<BattleController>
             Vector3 pos = enermyTransform.InverseTransformPoint(m_heroTransform.transform.position);
 
             float distance = Vector3.Distance(enermyTransform.position, m_heroTransform.transform.position);
-               
+
             if (direction == AttackDirection.Forward)
             {
                 if (pos.z > 0)

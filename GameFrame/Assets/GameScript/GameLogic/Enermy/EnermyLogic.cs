@@ -17,7 +17,7 @@ public class EnermyLogic : GameBehaviour
         m_enermyAnimation = Tools.GetComponent<EnermyAnimation>(gameObject);
 
         BattleController.GetInstance().m_enermiesTransform.Add(transform);
-        m_battleAttributes.Init(4f, 200, 3, 10);
+        m_battleAttributes.Init(4f, 200, 2, 10);
 
     }
     protected override void Uninit()
@@ -34,11 +34,12 @@ public class EnermyLogic : GameBehaviour
             HeroLogic heroLogic = heroTransform.GetComponent<HeroLogic>();
             heroLogic.BeAttacked(transform.GetComponent<BattleAttributes>());
 
+            //有转向动作时，动画播放会很奇怪
+            //Vector3 pos = heroTransform.position;
+            //pos.y = 0;
+            //transform.rotation = Quaternion.LookRotation(transform.InverseTransformPoint(pos));
+           // transform.LookAt(pos);
             m_enermyAnimation.AttackAnimation();
-
-            Vector3 pos = heroTransform.position;
-            pos.y = 0;
-            transform.rotation = Quaternion.LookRotation(transform.InverseTransformPoint(pos));
         }
     }
 
@@ -72,7 +73,6 @@ public class EnermyLogic : GameBehaviour
             {
                 enermyBattleAttributes.m_hp -= heroAttributes.m_skill3Damage;
             }
-
         }
     }
 
@@ -89,6 +89,6 @@ public class EnermyLogic : GameBehaviour
             {
                 Attack(heroTransform);
             }
-        }            
+        }      
     }
 }
