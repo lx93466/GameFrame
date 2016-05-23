@@ -12,6 +12,8 @@ public class HeroDriveMoving : GameBehaviour
 
     Vector3 m_relativePos = new Vector3(5, 10, 10);
 
+    Quaternion m_rotation;
+
     protected override void Init()
     {
         m_rigidbody = GetComponent<Rigidbody>();
@@ -42,5 +44,10 @@ public class HeroDriveMoving : GameBehaviour
         m_velocity = Vector3.zero;
         m_velocity.y = m_rigidbody.velocity.y;
         m_rigidbody.velocity = m_velocity;
+        m_rotation = transform.rotation;
+        m_rotation.x = 0;
+        m_rotation.z = 0;
+        transform.rotation = m_rotation;
+       
     }
 }
