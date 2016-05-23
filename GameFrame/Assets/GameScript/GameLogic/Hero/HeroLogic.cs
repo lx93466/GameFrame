@@ -20,6 +20,7 @@ public class HeroLogic : GameBehaviour {
         base.Init();
         //初始化组件
         m_rigidbody = transform.GetComponent<Rigidbody>();
+        m_rigidbody.freezeRotation = true;
         m_battleAttributes = Tools.GetComponent<BattleAttributes>(gameObject); 
         m_heroAnimation =  Tools.GetComponent<HeroAnimation>(gameObject);
         m_heroAttackEffect = Tools.GetComponent<HeroAttackEffect>(gameObject);

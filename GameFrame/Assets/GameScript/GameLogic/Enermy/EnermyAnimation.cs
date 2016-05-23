@@ -11,16 +11,13 @@ public class EnermyAnimation : GameBehaviour
     {
         m_animator = GetComponent<Animator>();
         Tools.AddAnimatorEvent(m_animator, "FlowerAttack", "EndAttackAnimation");
-       // AttackAnimation();
     }
     /// <summary>
     /// 默认动画，其它动画执行完后，自动执行此动画
     /// </summary>
     public void StandAnimation()
     {
-       // Debug.Log(gameObject.name +  ": enermy stand");
         m_animator.SetBool("stand", true);
-       // m_animator.SetBool("stand", true);
     }
 
     void TestAnimatorEvent()
@@ -30,19 +27,25 @@ public class EnermyAnimation : GameBehaviour
 
     public void MoveAnimation()
     {
-       
+        m_animator.SetBool("move", true);
+        m_animator.SetBool("attack", false);
+        m_animator.SetBool("stand", false);
+    }
+    public void EndMoveAnimation()
+    {
+        m_animator.SetBool("move", false);
+        m_animator.SetBool("stand", true);
     }
 
     public void AttackAnimation()
     {
-       Debug.Log(gameObject.name +  ": enermy attack");
-       m_animator.SetBool("attack", false);
+       m_animator.SetBool("attack", true);
     }
 
     public void EndAttackAnimation()
     {
-        Debug.Log(gameObject.name + ":end enermy attack");
-        m_animator.SetBool("attack", true);
+      //  Debug.Log(gameObject.name + ":end enermy attack");
+        m_animator.SetBool("attack", false);
     }
     public void BeAttackedAnimation()
     {

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 9fe110c73aa598e4db9c2f0179e27ade
-timeCreated: 1462859591
+guid: 4dc805ef26866754a81f2b5f812ffd45
+timeCreated: 1463969119
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -171,7 +171,7 @@ ModelImporter:
     400162: Particle View 01 9
     4300000: ce01_leg01
     4300002: lod1
-    7400000: run
+    7400000: HeroRun
     9500000: //RootNode
     13700000: ce01_leg01
     13700002: lod1
@@ -197,7 +197,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: run
+      name: HeroRun
       takeName: Take 001
       firstFrame: 0
       lastFrame: 18
@@ -207,7 +207,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

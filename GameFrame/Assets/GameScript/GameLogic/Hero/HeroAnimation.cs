@@ -9,14 +9,15 @@ public class HeroAnimation : GameBehaviour
     protected override void Init()
     {
         m_animator = GetComponent<Animator>();
-       // m_animator.
     }
 
     public void StandAnimation()
     {
         if (m_animator != null)
         {
-            m_animator.SetBool("standToRun", false);
+            m_animator.SetBool("stand", true);
+            m_animator.SetBool("run", false);
+
         }
     }
 
@@ -24,7 +25,8 @@ public class HeroAnimation : GameBehaviour
     {
         if (m_animator != null)
         {
-            m_animator.SetBool("standToRun", true);
+            m_animator.SetBool("stand", false);
+            m_animator.SetBool("run", true);
         }
     }
 

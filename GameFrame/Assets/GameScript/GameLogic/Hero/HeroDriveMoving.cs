@@ -30,12 +30,17 @@ public class HeroDriveMoving : GameBehaviour
             transform.rotation = Quaternion.LookRotation(m_velocity);
             m_velocity.y = m_rigidbody.velocity.y;
             m_rigidbody.velocity = m_velocity;
-        }      
+        }
+        else
+        {
+            StopMove();
+        }
     }
 
     public void StopMove()
     {
-        m_rigidbody.velocity = Vector3.zero;
-
+        m_velocity = Vector3.zero;
+        m_velocity.y = m_rigidbody.velocity.y;
+        m_rigidbody.velocity = m_velocity;
     }
 }

@@ -4,8 +4,11 @@ using GameFrame;
 
 public class EnermyLogic : GameBehaviour
 {
-    EnermyAnimation m_enermyAnimation = null;
-    BattleAttributes m_battleAttributes = null;
+    public EnermyAnimation m_enermyAnimation = null;
+    public BattleAttributes m_battleAttributes = null;
+    public FollowTarget m_followTarget = null;
+    public static EnermyLogic m_instance = null;
+
 
     float m_attackTime = 0;//距离上次攻击时间
     
@@ -13,11 +16,14 @@ public class EnermyLogic : GameBehaviour
     {
         base.Init();
 
+        m_instance = this;
+
         m_battleAttributes = Tools.GetComponent<BattleAttributes>(gameObject);
         m_enermyAnimation = Tools.GetComponent<EnermyAnimation>(gameObject);
-
+        m_followTarget = Tools.GetComponent<FollowTarget>(gameObject);
+        m_followTarget.m_target = BattleController.GetInstance().m_heroTransform;
         BattleController.GetInstance().m_enermiesTransform.Add(transform);
-        m_battleAttributes.Init(4f, 200, 2, 10);
+        m_battleAttributes.Init(4f, 200, 3, 10);
 
     }
     protected override void Uninit()
@@ -89,6 +95,6 @@ public class EnermyLogic : GameBehaviour
             {
                 Attack(heroTransform);
             }
-        }      
+        }
     }
 }
