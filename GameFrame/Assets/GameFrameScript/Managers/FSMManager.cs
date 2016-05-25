@@ -11,6 +11,16 @@ namespace GameFrame
             m_stateName = name;
         }
     }
+
+    public enum State
+    {
+        None,
+        Initialized,//初始化完毕
+        Executing,//执行中
+        End//状态执行结束
+    }
+
+    public delegate void StateExecuteDelegate();
     /// <summary>
     /// 只是单纯的状态，任何状态之间都可以切换，没有状态与状态之间的关联控制
     /// </summary>
@@ -18,19 +28,43 @@ namespace GameFrame
     {
         public FSMStateId m_stateId = null;
 
+        public bool m_break = true; // 状态在执行过程中，是否可以被打断
+
+        public float m_stateTime = 0; //状态执行时间
+        //状态执行主体
+        public StateExecuteDelegate m_executeDalegate = null;
+
+        public State m_state = State.None;
+
         public FSMState()
         {
             Init();
+            m_state = State.Initialized;
         }
-
+        //状态初始化
         public abstract void Init();
 
-        public abstract void Enter();
+        public void Execute()
+        {
+            m_state = State.Executing;
+           
+            if (m_executeDalegate!= null)
+            {
+                m_executeDalegate();                     
+            }
 
+            TimerManager.GetInstance().DelayCall(EndExecute, m_stateTime);
+        }
+
+        protected void EndExecute()
+        {
+            m_state = State.End;
+            Exit();
+        }
+
+        //执行结束
         public virtual void Exit() { }
 
-        //每帧刷新
-        public virtual void Update() { }
     }
 
     public class FSMManager
@@ -70,38 +104,52 @@ namespace GameFrame
 
         public void ChangeState(FSMStateId stateId)
         {
-            if (stateId != null)
+            if (m_curState != null)
             {
-                if (m_curState != null)
+                if (m_curState.m_state == State.Executing && m_curState.m_break == false)
                 {
-                    Tools.AddLog("Changed state from " + m_curState.m_stateId.m_stateName + " to " + stateId.m_stateName);
+                    Tools.AddLog("当前状态[" + m_curState.m_stateId.m_stateName + "]正在执行，并且不可被打断");
                 }
                 else
                 {
-                    Tools.AddLog("Changed state from no state to " + stateId.m_stateName);
-                }
+                    FSMState changeState = null;
 
-                FSMState changeState = null;
-
-                if (m_states.TryGetValue(stateId, out changeState))
-                {
-                    if (m_curState != null)
+                    if (m_states.TryGetValue(stateId, out changeState))
                     {
-                        m_curState.Exit();
+                        if (changeState.m_state == State.Executing && changeState.m_break == false)
+                        {
+                            Tools.AddLog("切换状态时，新切换的状态[" + changeState.m_stateId.m_stateName + "]正在执行，并且不可被打断");
+                        }
+                        else
+                        {
+                            Tools.AddLog("切换状态：从" + m_curState.m_stateId.m_stateName + "切换到" + changeState.m_stateId.m_stateName);
+                           
+                            changeState.Execute();
+                           
+                            m_curState = changeState;
+                        }
                     }
-
-                    changeState.Enter();
-
-                    m_curState = changeState;                    
-                }
-                else
-                {
-                    Tools.AddError("ChangeState: Adding state is not existed.");
                 }
             }
             else
             {
-                Tools.AddError("ChangeState: State id is null.");
+                 FSMState changeState = null;
+
+                if (m_states.TryGetValue(stateId, out changeState))
+                {
+                    if (changeState.m_state == State.Executing && changeState.m_break == false)
+                    {
+                        Tools.AddLog("切换状态时，新切换的状态[" + changeState.m_stateId.m_stateName + "]正在执行，并且不可被打断");
+                    }
+                    else
+                    {
+                        changeState.Execute();
+
+                        m_curState = changeState;
+                       
+                        Tools.AddLog("切换状态：从无状态切换到" + changeState.m_stateId.m_stateName);
+                    }
+                }
             }
         }
     }
