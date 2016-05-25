@@ -21,14 +21,14 @@ public class EnermyLogic : GameBehaviour
         m_enermyAnimation = Tools.GetComponent<EnermyAnimation>(gameObject);
         m_followTarget = Tools.GetComponent<FollowTarget>(gameObject);
         m_followTarget.m_target = BattleController.GetInstance().m_heroTransform;
-        BattleController.GetInstance().m_enermiesTransform.Add(transform);
+        BattleController.GetInstance().m_enermyTransforms.Add(transform);
         m_battleAttributes.Init(2f, 200, 3, 10);
 
     }
     protected override void Uninit()
     {
         base.Uninit();
-        BattleController.GetInstance().m_enermiesTransform.Remove(transform);
+        BattleController.GetInstance().m_enermyTransforms.Remove(transform);
     }
     
     //攻击
@@ -36,7 +36,7 @@ public class EnermyLogic : GameBehaviour
     {
         if (heroTransform != null)
         {
-            HeroLogic heroLogic = heroTransform.GetComponent<HeroLogic>();
+            HeroLogic_old heroLogic = heroTransform.GetComponent<HeroLogic_old>();
             heroLogic.BeAttacked(transform.GetComponent<BattleAttributes>());
 
             //有转向动作时，动画播放会很奇怪
@@ -92,7 +92,7 @@ public class EnermyLogic : GameBehaviour
     }
     void Disappear()
     {
-        BattleController.GetInstance().m_enermiesTransform.Remove(transform);
+        BattleController.GetInstance().m_enermyTransforms.Remove(transform);
         transform.GetComponent<HpBar>().Disappear(m_battleAttributes.m_name);
         GameObject.Destroy(gameObject);
     }

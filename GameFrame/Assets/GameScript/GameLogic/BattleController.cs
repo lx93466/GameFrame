@@ -4,7 +4,7 @@ using GameFrame;
 
 public class BattleController : Singleton<BattleController> 
 {
-    public HashSet<Transform> m_enermiesTransform = new HashSet<Transform>();
+    public HashSet<Transform> m_enermyTransforms = new HashSet<Transform>();
 
     public Transform m_heroTransform = null;
 
@@ -14,7 +14,7 @@ public class BattleController : Singleton<BattleController>
 
         if (m_heroTransform != null)
         {
-            foreach (var enermy in m_enermiesTransform)
+            foreach (var enermy in m_enermyTransforms)
             {
                 Vector3 pos = m_heroTransform.InverseTransformPoint(enermy.transform.position);
 

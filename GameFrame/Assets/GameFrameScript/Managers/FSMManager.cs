@@ -33,37 +33,63 @@ namespace GameFrame
         public float m_stateTime = 0; //状态执行时间
         //状态执行主体
         public StateExecuteDelegate m_executeDalegate = null;
+        //固定刷新(20fps)
+        public TimerCallback m_fixedUpdateDalegate = null;
 
         public State m_state = State.None;
+
+        int m_executeTimerId = TimerManager.GetInstance().GetTimerID();
+        int m_fixedUpdateTimerId = TimerManager.GetInstance().GetTimerID();
 
         public FSMState()
         {
             Init();
             m_state = State.Initialized;
         }
-        //状态初始化
-        public abstract void Init();
+       
 
         public void Execute()
         {
             m_state = State.Executing;
            
-            if (m_executeDalegate!= null)
+            if (m_executeDalegate != null)
             {
-                m_executeDalegate();                     
+                m_executeDalegate();
+                if (m_fixedUpdateDalegate != null)
+                {
+                    TimerManager.GetInstance().Schedule(m_fixedUpdateDalegate, m_fixedUpdateTimerId, 0.05f);
+                }
+                if (m_stateTime < 0.0001)//执行时间小于0
+                {
+                    EndExecuteCallback();
+                }
+                else
+                {
+                    TimerManager.GetInstance().Schedule(EndExecuteCallback, m_executeTimerId, m_stateTime, m_stateTime, false);
+                }
             }
-
-            TimerManager.GetInstance().DelayCall(EndExecute, m_stateTime);
         }
 
-        protected void EndExecute()
+        void EndExecuteCallback()
         {
+            TimerManager.GetInstance().Unschedule(m_executeTimerId);
+            TimerManager.GetInstance().Unschedule(m_fixedUpdateTimerId);
+            EndOfExecute();
             m_state = State.End;
-            Exit();
         }
 
-        //执行结束
-        public virtual void Exit() { }
+        //状态初始化
+        protected abstract void Init();
+        protected virtual void EndOfExecute() { }
+
+        //结束动画状态
+        public virtual void ForceExit() 
+        {
+            TimerManager.GetInstance().Unschedule(m_executeTimerId);
+            TimerManager.GetInstance().Unschedule(m_fixedUpdateTimerId);
+            EndOfExecute();
+            m_state = State.End;
+        }
 
     }
 
@@ -83,14 +109,6 @@ namespace GameFrame
                 {
                     m_states.Add(state.m_stateId, state);
                 }
-                else
-                {
-                    Tools.AddError("AddState: Adding state is existed.");
-                }
-            }
-            else
-            {
-                Tools.AddError("AddState: Adding state is null or state.m_stateId is null.");
             }
         }
 
@@ -102,54 +120,50 @@ namespace GameFrame
             }
         }
 
+        void ExecuteState(FSMStateId stateId)
+        {
+            FSMState changeState = null;
+            if (m_states.TryGetValue(stateId, out changeState))
+            {
+                if (changeState.m_state == State.Executing && changeState.m_break == false)
+                {
+                    Tools.AddLog("状态正在执行，不能被打断");
+                }
+                else if(changeState.m_state == State.Executing && changeState.m_break == true)
+                {
+                    changeState.ForceExit();
+                    changeState.Execute();
+                    m_curState = changeState;
+                }
+                else
+                {
+                    changeState.Execute();
+                    m_curState = changeState;
+                }
+            }
+        }
+
         public void ChangeState(FSMStateId stateId)
         {
             if (m_curState != null)
             {
                 if (m_curState.m_state == State.Executing && m_curState.m_break == false)
                 {
-                    Tools.AddLog("当前状态[" + m_curState.m_stateId.m_stateName + "]正在执行，并且不可被打断");
+                    Tools.AddLog("当前状态正在执行，不能被打断");
+                }
+                else if (m_curState.m_state == State.Executing && m_curState.m_break == true)
+                {
+                    m_curState.ForceExit();
+                    ExecuteState(stateId);
                 }
                 else
                 {
-                    FSMState changeState = null;
-
-                    if (m_states.TryGetValue(stateId, out changeState))
-                    {
-                        if (changeState.m_state == State.Executing && changeState.m_break == false)
-                        {
-                            Tools.AddLog("切换状态时，新切换的状态[" + changeState.m_stateId.m_stateName + "]正在执行，并且不可被打断");
-                        }
-                        else
-                        {
-                            Tools.AddLog("切换状态：从" + m_curState.m_stateId.m_stateName + "切换到" + changeState.m_stateId.m_stateName);
-                           
-                            changeState.Execute();
-                           
-                            m_curState = changeState;
-                        }
-                    }
+                    ExecuteState(stateId);
                 }
             }
             else
             {
-                 FSMState changeState = null;
-
-                if (m_states.TryGetValue(stateId, out changeState))
-                {
-                    if (changeState.m_state == State.Executing && changeState.m_break == false)
-                    {
-                        Tools.AddLog("切换状态时，新切换的状态[" + changeState.m_stateId.m_stateName + "]正在执行，并且不可被打断");
-                    }
-                    else
-                    {
-                        changeState.Execute();
-
-                        m_curState = changeState;
-                       
-                        Tools.AddLog("切换状态：从无状态切换到" + changeState.m_stateId.m_stateName);
-                    }
-                }
+                ExecuteState(stateId);
             }
         }
     }

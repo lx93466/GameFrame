@@ -13,59 +13,58 @@ class TestStateIdDefine
 
 class State1 : FSMState
 {
-    public override void Enter()
-    {
-        Debug.Log("State1.Enter()");
-    }
-
-    public override void Exit()
-    {
-        Debug.Log("State1.Exit()");
-    }
-
-    public override void Init()
+    protected override void Init()
     {
         m_stateId = TestStateIdDefine.state1;
+        m_executeDalegate = State1Execute;
+        m_stateTime = 3;
+        m_break = true;
+    }
+    protected override void EndOfExecute()
+    {
+        Debug.Log("State1 EndOfExecute");
+    }
+    void State1Execute()
+    {
+        Debug.Log("State1 Execute");
     }
 }
 
 class State2 : FSMState
 {
-    public override void Enter()
+    protected override void Init()
     {
         m_stateId = TestStateIdDefine.state2;
-
-        Debug.Log("State2.Enter()");
+        m_executeDalegate = State2Execute;
+        m_stateTime = 3;
+        m_break = false;
     }
-
-    public override void Exit()
+    protected override void EndOfExecute()
     {
-        Debug.Log("State2.Exit()");
+        Debug.Log("State2 EndOfExecute");
     }
-
-    public override void Init()
+    void State2Execute()
     {
-        m_stateId = TestStateIdDefine.state2;
+        Debug.Log("State2 Execute");
     }
 }
 
 class State3 : FSMState
 {
-    public override void Enter()
+    protected override void Init()
     {
         m_stateId = TestStateIdDefine.state3;
-
-        Debug.Log("State3.Enter()");
+        m_executeDalegate = State3Execute;
+        m_stateTime = 3;
+        m_break = false;
     }
-
-    public override void Exit()
+    protected override void EndOfExecute()
     {
-        Debug.Log("State3.Exit()");
+        Debug.Log("State3 EndOfExecute");
     }
-
-    public override void Init()
+    void State3Execute()
     {
-        m_stateId = TestStateIdDefine.state3;
+        Debug.Log("State3 Execute");
     }
 }
 

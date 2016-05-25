@@ -1,5 +1,5 @@
 ﻿using GameFrame;
-
+using UnityEngine;
 public enum AttackDirection
 {
     Forward,//攻击前方
@@ -25,4 +25,6 @@ public class Hero
 
     public int m_curHp = 200;
     public string m_name = "柔小乖";
+
+    public Transform m_heroTransform = null;
 }

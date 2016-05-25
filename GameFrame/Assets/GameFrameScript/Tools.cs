@@ -60,7 +60,7 @@ namespace GameFrame
         #endregion
         
        
-        public static T GetComponent<T>(GameObject gameObject) where T : MonoBehaviour
+        public static T GetComponent<T>(GameObject gameObject) where T : Behaviour
         {
             T t = null;
 

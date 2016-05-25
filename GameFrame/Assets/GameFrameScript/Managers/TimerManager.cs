@@ -59,8 +59,6 @@ namespace GameFrame
             else
             {
                 ret = false;
-
-                Tools.AddError("The timerID of Timer is not registered.");
             }
 
             return ret;

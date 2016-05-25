@@ -52,8 +52,6 @@ namespace GameFrame
                m_loop = loop;
 
                gameObject.name = "Timer[timer id: " + m_timerID + "]";
-
-               Tools.AddLog("Registered timer: " + gameObject.name);
             }     
         }
 

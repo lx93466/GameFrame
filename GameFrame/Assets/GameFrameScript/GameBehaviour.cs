@@ -5,8 +5,14 @@ namespace GameFrame
 {
     public class GameBehaviour : MonoBehaviour 
     {
-        Dictionary<Msg, MsgCallback> m_registeredMsg = new Dictionary<Msg, MsgCallback>();	   
+        Dictionary<Msg, MsgCallback> m_registeredMsg = new Dictionary<Msg, MsgCallback>();
 
+        bool m_run = false;
+
+        public void Run()
+        {
+            m_run = true;
+        }
         protected void RegisterMsg(Msg msgId, MsgCallback callback)
         {
             if (MsgManager.GetInstance().RegisterMsg(msgId, callback))
@@ -33,6 +39,16 @@ namespace GameFrame
         void OnDestroy()
         {
             Uninit();
+        }
+   
+        protected virtual void GameFixedUpdate(){}
+
+        void FixedUpdate()
+        {
+            if (m_run)
+            {
+                GameFixedUpdate();
+            }
         }
     }
 }
