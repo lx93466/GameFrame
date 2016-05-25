@@ -9,7 +9,6 @@ public class EnermyLogic : GameBehaviour
     public FollowTarget m_followTarget = null;
     public static EnermyLogic m_instance = null;
 
-
     float m_attackTime = 0;//距离上次攻击时间
     
     protected override void Init()
@@ -23,7 +22,7 @@ public class EnermyLogic : GameBehaviour
         m_followTarget = Tools.GetComponent<FollowTarget>(gameObject);
         m_followTarget.m_target = BattleController.GetInstance().m_heroTransform;
         BattleController.GetInstance().m_enermiesTransform.Add(transform);
-        m_battleAttributes.Init(4f, 200, 3, 10);
+        m_battleAttributes.Init(2f, 200, 3, 10);
 
     }
     protected override void Uninit()
@@ -61,27 +60,42 @@ public class EnermyLogic : GameBehaviour
             BattleAttributes enermyBattleAttributes = transform.GetComponent<BattleAttributes>();
             if (attackType == HeroAttackType.Attack1)
 	        {
-                enermyBattleAttributes.m_hp -= heroAttributes.m_attackDamage;		 
+                enermyBattleAttributes.m_curHp -= heroAttributes.m_attackDamage;		 
 	        }
             else if (attackType == HeroAttackType.Attack2)
             {
-                enermyBattleAttributes.m_hp -= heroAttributes.m_attackDamage;		                 
+                enermyBattleAttributes.m_curHp -= heroAttributes.m_attackDamage;		                 
             }
             else if (attackType == HeroAttackType.Skill1)
             {
-                enermyBattleAttributes.m_hp -= heroAttributes.m_skill1Damage;		                                 
+                enermyBattleAttributes.m_curHp -= heroAttributes.m_skill1Damage;		                                 
             }
             else if (attackType == HeroAttackType.Skill2)
             {
-                enermyBattleAttributes.m_hp -= heroAttributes.m_skill2Damage;
+                enermyBattleAttributes.m_curHp -= heroAttributes.m_skill2Damage;
             }
             else if (attackType == HeroAttackType.Skill3)
             {
-                enermyBattleAttributes.m_hp -= heroAttributes.m_skill3Damage;
+                enermyBattleAttributes.m_curHp -= heroAttributes.m_skill3Damage;
+            }
+            if (enermyBattleAttributes.m_curHp <= 0)
+            {
+                Die();
             }
         }
     }
 
+    public void Die()
+    {
+        m_enermyAnimation.DieAnimation();
+        TimerManager.GetInstance().DelayCall(Disappear, 5f);
+    }
+    void Disappear()
+    {
+        BattleController.GetInstance().m_enermiesTransform.Remove(transform);
+        transform.GetComponent<HpBar>().Disappear(m_battleAttributes.m_name);
+        GameObject.Destroy(gameObject);
+    }
     void Update()
     {
         m_attackTime += Time.deltaTime;
@@ -96,5 +110,11 @@ public class EnermyLogic : GameBehaviour
                 Attack(heroTransform);
             }
         }
+        else
+        {
+            m_enermyAnimation.StandAnimation();
+        }
+
     }
+
 }

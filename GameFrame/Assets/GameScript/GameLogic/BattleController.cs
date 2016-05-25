@@ -17,8 +17,8 @@ public class BattleController : Singleton<BattleController>
             foreach (var enermy in m_enermiesTransform)
             {
                 Vector3 pos = m_heroTransform.InverseTransformPoint(enermy.transform.position);
-               
-                float distance = Vector3.Distance(Vector3.zero, pos);
+
+                float distance = Vector3.Distance(enermy.position, m_heroTransform.position);
                
                 if (direction == AttackDirection.Forward)
                 {

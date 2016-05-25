@@ -8,12 +8,14 @@ public class FollowTarget : GameBehaviour
     CharacterController m_characterCtrl = null;
     BattleAttributes m_battleAttributes = null;
     EnermyAnimation m_enermyAnimation = null;
+    public HpBar m_hpBar = null;
     protected override void Init()
     {
         m_battleAttributes = Tools.GetComponent<BattleAttributes>(gameObject);
         m_characterCtrl = transform.GetComponent<CharacterController>();
         m_enermyAnimation = Tools.GetComponent<EnermyAnimation>(gameObject);
         base.Init();
+        m_hpBar = Tools.GetComponent<HpBar>(gameObject);
 
         m_enermyAnimation.MoveAnimation();
     }
@@ -33,6 +35,7 @@ public class FollowTarget : GameBehaviour
             {
                 m_enermyAnimation.EndMoveAnimation();
             }
+            m_hpBar.UpdateHp(transform.Find("HpBarPoint").transform.position, m_battleAttributes.m_hp, m_battleAttributes.m_curHp, m_battleAttributes.m_name);
         }
 	}
 }

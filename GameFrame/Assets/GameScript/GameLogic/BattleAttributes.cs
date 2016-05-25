@@ -6,6 +6,8 @@ public class BattleAttributes : GameBehaviour
 {
     public float m_attackDistance = 0;//攻击距离
     public int m_hp = 0;//血量
+    public int m_curHp = 0;//当前血量
+    public string m_name = "怪物";
     public int m_speed = 0; //速度
     public int m_attackDamage = 0; //攻击伤害
     public float m_attackTime = 2;//隔多少秒攻击一次
@@ -26,6 +28,7 @@ public class BattleAttributes : GameBehaviour
         m_attackDistance = attackDistance;
         m_speed = speed;
         m_hp = hp;
+        m_curHp = hp;
         m_attackDamage = attackDamage;
 
         m_skill1Damage = skill1Damage;

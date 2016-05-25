@@ -220,4 +220,6 @@ public class BattleUI : UIBase
     {
         data.pointerPress.transform.localScale = new Vector3(1, 1, 1);
     }
+
+   
 }

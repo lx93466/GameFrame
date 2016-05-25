@@ -14,7 +14,9 @@ public class HeroLogic : GameBehaviour {
     HeroDriveMoving m_heroDriveMoving = null;
     HeroAutoMoving m_heroAutoMoving = null;
     BattleAttributes m_battleAttributes = null;
-  
+    HpBar m_hpBar = null;
+
+    Hero m_hero = GameApp.GetInstance().m_hero;
     protected override void Init()
     {
         base.Init();
@@ -26,9 +28,9 @@ public class HeroLogic : GameBehaviour {
         m_heroAttackEffect = Tools.GetComponent<HeroAttackEffect>(gameObject);
         m_heroDriveMoving = Tools.GetComponent<HeroDriveMoving>(gameObject);
         m_heroAutoMoving = Tools.GetComponent<HeroAutoMoving>(gameObject);
-     
+        m_hpBar = Tools.GetComponent<HpBar>(gameObject);
         //初始化战斗数据
-        m_battleAttributes.Init(3f, 2000, 5, 20, 30, 30, 30);
+        m_battleAttributes.Init(3f, 2000, 5, 50, 30, 30, 30);
         BattleController.GetInstance().m_heroTransform = transform;
       
         //注册消息
@@ -60,6 +62,8 @@ public class HeroLogic : GameBehaviour {
 
             m_heroAnimation.StandAnimation();
         }
+
+        m_hpBar.UpdateHp(transform.Find("HpBarPoint").transform.position, m_hero.m_hp, m_hero.m_curHp, m_hero.m_name);
     }
 
     void AttackCallBack(Hashtable arg)

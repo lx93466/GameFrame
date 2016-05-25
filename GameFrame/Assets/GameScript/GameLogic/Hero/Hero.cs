@@ -21,5 +21,8 @@ public class Hero
     public float m_attackDistance = 1;//攻击距离
     public int m_hp = 200;//血量
     public int m_speed = 10; //速度
-    public int m_damage = 20; //攻击力	
+    public int m_damage = 50; //攻击力	
+
+    public int m_curHp = 200;
+    public string m_name = "柔小乖";
 }

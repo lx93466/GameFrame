@@ -14,7 +14,7 @@ namespace GameFrame
     /// </summary>
     public abstract class UIBase
     {
-        protected Transform m_root = null;
+        public Transform m_root = null;
 
         protected bool m_visible = false;
 
