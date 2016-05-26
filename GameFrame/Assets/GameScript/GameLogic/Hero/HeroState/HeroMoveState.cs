@@ -17,6 +17,7 @@ public class HeroMoveState : FSMState
         m_heroAnimation = Tools.GetComponent<HeroAnimation>(m_heroTransform.gameObject);
         m_agent = Tools.GetComponent<NavMeshAgent>(heroTransform.gameObject);
         m_fixedUpdateDalegate = GameFixedUpdate;
+        m_executeDalegate = ExecuteMove;
     }
 
     void GameFixedUpdate()
@@ -28,6 +29,11 @@ public class HeroMoveState : FSMState
         }
     }
 
+    void ExecuteMove(Hashtable args)
+    {
+        Vector3 pos = (Vector3)args["pos"];
+        Move(pos);
+    }
     public void Move(Vector3 pos)
     {
         m_agent.SetDestination(pos);

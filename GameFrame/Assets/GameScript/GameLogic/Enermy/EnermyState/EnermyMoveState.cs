@@ -30,6 +30,7 @@ public class EnermyMoveState : FSMState
             if (m_fsmControlManager.m_curState != this || m_targetPos != heroTransform.position)
             {
                 m_targetPos = heroTransform.position;
+                m_enermyTransform.LookAt(m_targetPos);
                 m_agent.SetDestination(heroTransform.position);
                 m_enermyAnimation.MoveAnimation();
             }

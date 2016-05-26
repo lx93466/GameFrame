@@ -24,9 +24,9 @@ public class BattleController : GameBehaviour
 
     Hashtable args = new Hashtable();
 
-    public HashSet<Transform> HeroGetAttackableEnermies(AttackDirection direction = AttackDirection.Forward)
+    public HashSet<FSMManager> HeroGetAttackableEnermies(AttackDirection direction = AttackDirection.Forward)
     {
-        HashSet<Transform> enermies = new HashSet<Transform>();
+        HashSet<FSMManager> enermyFSMManager = new HashSet<FSMManager>();
 
         if (m_heroTransform != null)
         {
@@ -42,7 +42,7 @@ public class BattleController : GameBehaviour
                     {
                         if (distance < GameApp.GetInstance().m_hero.m_attackDistance)
                         {
-                            enermies.Add(enermy);
+                            enermyFSMManager.Add(enermy.GetComponent<EnermyLogic>().m_fsmManager);
                         }
                     }
                 }
@@ -50,12 +50,12 @@ public class BattleController : GameBehaviour
                 {
                     if (distance < GameApp.GetInstance().m_hero.m_attackDistance)//当前玩家只有一个英雄
                     {
-                        enermies.Add(enermy);
+                        enermyFSMManager.Add(enermy.GetComponent<EnermyLogic>().m_fsmManager);
                     }
                 }
             }
         }
-        return enermies;
+        return enermyFSMManager;
     }
 
     public Transform EnermyGetAttackableHero(Transform enermyTransform, AttackDirection direction = AttackDirection.Forward)

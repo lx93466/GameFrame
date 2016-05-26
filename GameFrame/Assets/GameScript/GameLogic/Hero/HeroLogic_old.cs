@@ -13,7 +13,7 @@ public class HeroLogic_old : GameBehaviour
     HeroAnimation m_heroAnimation = null;
     HeroAttackEffect m_heroAttackEffect = null;
     HeroDriveMoving m_heroDriveMoving = null;
-    HeroMove m_heroAutoMoving = null;
+    //HeroMove m_heroAutoMoving = null;
     BattleAttributes m_battleAttributes = null;
     HpBar m_hpBar = null;
 
@@ -28,7 +28,7 @@ public class HeroLogic_old : GameBehaviour
         m_heroAnimation =  Tools.GetComponent<HeroAnimation>(gameObject);
         m_heroAttackEffect = Tools.GetComponent<HeroAttackEffect>(gameObject);
         m_heroDriveMoving = Tools.GetComponent<HeroDriveMoving>(gameObject);
-        m_heroAutoMoving = Tools.GetComponent<HeroMove>(gameObject);
+       // m_heroAutoMoving = Tools.GetComponent<HeroMove>(gameObject);
         m_hpBar = Tools.GetComponent<HpBar>(gameObject);
         //初始化战斗数据
         m_battleAttributes.Init(3f, 2000, 5, 50, 30, 30, 30);
@@ -90,11 +90,11 @@ public class HeroLogic_old : GameBehaviour
     {
         if (attackType == AttackType.Attack1)
         {
-            HashSet<Transform> enermiesTransform = BattleController.m_battleController.HeroGetAttackableEnermies();
+           // HashSet<Transform> enermiesTransform = BattleController.m_battleController.HeroGetAttackableEnermies();
 
-            foreach (var enermyTransform in enermiesTransform)
+           // foreach (var enermyTransform in enermiesTransform)
             {
-                EnermyLogic enermyLogic = enermyTransform.GetComponent<EnermyLogic>();
+           //     EnermyLogic enermyLogic = enermyTransform.GetComponent<EnermyLogic>();
                // enermyLogic.BeAttacked(m_battleAttributes);
             }
         }
