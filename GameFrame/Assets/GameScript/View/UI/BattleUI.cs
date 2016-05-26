@@ -88,7 +88,7 @@ public class BattleUI : UIBase
                
                 //触发攻击敌人逻辑
                 Hashtable arg = new Hashtable();
-                arg["attackType"] = HeroAttackType.Skill1;
+                arg["attackType"] = AttackType.Skill1;
                 MsgManager.GetInstance().DispatchMsg(HeroMsg.heroAttackMsg, arg);
             }           
         }
@@ -112,7 +112,7 @@ public class BattleUI : UIBase
 
                 //触发攻击敌人逻辑
                 Hashtable arg = new Hashtable();
-                arg["attackType"] = HeroAttackType.Skill2;
+                arg["attackType"] = AttackType.Skill2;
                 MsgManager.GetInstance().DispatchMsg(HeroMsg.heroAttackMsg, arg);
             }
         }
@@ -136,7 +136,7 @@ public class BattleUI : UIBase
 
                 //触发攻击敌人逻辑
                 Hashtable arg = new Hashtable();
-                arg["attackType"] = HeroAttackType.Skill3;
+                arg["attackType"] = AttackType.Skill3;
                 MsgManager.GetInstance().DispatchMsg(HeroMsg.heroAttackMsg, arg);
             }
         }

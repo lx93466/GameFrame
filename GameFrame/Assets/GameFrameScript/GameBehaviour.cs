@@ -7,11 +7,11 @@ namespace GameFrame
     {
         Dictionary<Msg, MsgCallback> m_registeredMsg = new Dictionary<Msg, MsgCallback>();
 
-        bool m_run = false;
+        bool m_runFixedUpdate = false;
 
-        public void Run()
+        public void RunFixedUpdate()
         {
-            m_run = true;
+            m_runFixedUpdate = true;
         }
         protected void RegisterMsg(Msg msgId, MsgCallback callback)
         {
@@ -45,7 +45,7 @@ namespace GameFrame
 
         void FixedUpdate()
         {
-            if (m_run)
+            if (m_runFixedUpdate)
             {
                 GameFixedUpdate();
             }

@@ -30,23 +30,23 @@ public class HeroAnimation : GameBehaviour
         }
     }
 
-    public void AttackAnimation(HeroAttackType attackType)
+    public void AttackAnimation(AttackType attackType)
     {
         //点击普通攻击按钮时，无法判断攻击类型，触发普通攻击动画
-        //HeroAttackType.Attack1和HeroAttackType.Attack2类型在特效函数中分发消息参数 
-        if (attackType == HeroAttackType.None)
+        //AttackType.Attack1和HeroAttackType.Attack2类型在特效函数中分发消息参数 
+        if (attackType == AttackType.None)
         {
             PlayAttackAnimation();
         }
-        else if (attackType == HeroAttackType.Skill1)
+        else if (attackType == AttackType.Skill1)
         {
             PlaySkill1Animation();
         }
-        else if (attackType == HeroAttackType.Skill2)
+        else if (attackType == AttackType.Skill2)
         {
             PlaySkill2Animation();
         }
-        else if (attackType == HeroAttackType.Skill3)
+        else if (attackType == AttackType.Skill3)
         {
             PlaySkill3Animation();
         }            

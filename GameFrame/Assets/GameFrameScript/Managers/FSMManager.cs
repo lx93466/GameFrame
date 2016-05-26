@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace GameFrame
 {
@@ -12,7 +13,7 @@ namespace GameFrame
         }
     }
 
-    public enum State
+    public enum FSMRunState
     {
         None,
         Initialized,//初始化完毕
@@ -20,11 +21,11 @@ namespace GameFrame
         End//状态执行结束
     }
 
-    public delegate void StateExecuteDelegate();
+    public delegate void StateExecuteDelegate(Hashtable args);
     /// <summary>
     /// 只是单纯的状态，任何状态之间都可以切换，没有状态与状态之间的关联控制
     /// </summary>
-    public abstract class FSMState
+    public class FSMState
     {
         public FSMStateId m_stateId = null;
 
@@ -36,7 +37,9 @@ namespace GameFrame
         //固定刷新(20fps)
         public TimerCallback m_fixedUpdateDalegate = null;
 
-        public State m_state = State.None;
+        public FSMRunState m_state = FSMRunState.None;
+
+        public FSMManager m_fsmControlManager = null;
 
         int m_executeTimerId = TimerManager.GetInstance().GetTimerID();
         int m_fixedUpdateTimerId = TimerManager.GetInstance().GetTimerID();
@@ -44,29 +47,30 @@ namespace GameFrame
         public FSMState()
         {
             Init();
-            m_state = State.Initialized;
+            m_state = FSMRunState.Initialized;
         }
        
 
-        public void Execute()
+        public void Execute(Hashtable args)
         {
-            m_state = State.Executing;
+            m_state = FSMRunState.Executing;
            
             if (m_executeDalegate != null)
             {
-                m_executeDalegate();
-                if (m_fixedUpdateDalegate != null)
-                {
-                    TimerManager.GetInstance().Schedule(m_fixedUpdateDalegate, m_fixedUpdateTimerId, 0.05f);
-                }
-                if (m_stateTime < 0.0001)//执行时间小于0
-                {
-                    EndExecuteCallback();
-                }
-                else
-                {
-                    TimerManager.GetInstance().Schedule(EndExecuteCallback, m_executeTimerId, m_stateTime, m_stateTime, false);
-                }
+                m_executeDalegate(args);
+            }
+            if (m_fixedUpdateDalegate != null)
+            {
+                TimerManager.GetInstance().Schedule(m_fixedUpdateDalegate, m_fixedUpdateTimerId, 0.05f);
+            }
+
+            if (m_stateTime < 0.0001)//执行时间小于0
+            {
+                EndExecuteCallback();
+            }
+            else
+            {
+                TimerManager.GetInstance().Schedule(EndExecuteCallback, m_executeTimerId, m_stateTime, m_stateTime, false);
             }
         }
 
@@ -75,11 +79,11 @@ namespace GameFrame
             TimerManager.GetInstance().Unschedule(m_executeTimerId);
             TimerManager.GetInstance().Unschedule(m_fixedUpdateTimerId);
             EndOfExecute();
-            m_state = State.End;
+            m_state = FSMRunState.End;
         }
 
         //状态初始化
-        protected abstract void Init();
+        protected virtual void Init(){}
         protected virtual void EndOfExecute() { }
 
         //结束动画状态
@@ -88,7 +92,7 @@ namespace GameFrame
             TimerManager.GetInstance().Unschedule(m_executeTimerId);
             TimerManager.GetInstance().Unschedule(m_fixedUpdateTimerId);
             EndOfExecute();
-            m_state = State.End;
+            m_state = FSMRunState.End;
         }
 
     }
@@ -97,7 +101,7 @@ namespace GameFrame
     {
         Dictionary<FSMStateId, FSMState> m_states = new Dictionary<FSMStateId, FSMState>();
 
-        FSMState m_curState = null;
+        public FSMState m_curState = null;
 
         public void AddState(FSMState state)
         {
@@ -107,6 +111,7 @@ namespace GameFrame
 
                 if (!m_states.TryGetValue(state.m_stateId, out tempState))
                 {
+                    state.m_fsmControlManager = this;
                     m_states.Add(state.m_stateId, state);
                 }
             }
@@ -120,50 +125,50 @@ namespace GameFrame
             }
         }
 
-        void ExecuteState(FSMStateId stateId)
+        void ExecuteState(FSMStateId stateId, Hashtable args = null)
         {
             FSMState changeState = null;
             if (m_states.TryGetValue(stateId, out changeState))
             {
-                if (changeState.m_state == State.Executing && changeState.m_break == false)
+                if (changeState.m_state == FSMRunState.Executing && changeState.m_break == false)
                 {
                     Tools.AddLog("状态正在执行，不能被打断");
                 }
-                else if(changeState.m_state == State.Executing && changeState.m_break == true)
+                else if(changeState.m_state == FSMRunState.Executing && changeState.m_break == true)
                 {
                     changeState.ForceExit();
-                    changeState.Execute();
+                    changeState.Execute(args);
                     m_curState = changeState;
                 }
                 else
                 {
-                    changeState.Execute();
+                    changeState.Execute(args);
                     m_curState = changeState;
                 }
             }
         }
 
-        public void ChangeState(FSMStateId stateId)
+        public void ChangeState(FSMStateId stateId, Hashtable args = null)
         {
             if (m_curState != null)
             {
-                if (m_curState.m_state == State.Executing && m_curState.m_break == false)
+                if (m_curState.m_state == FSMRunState.Executing && m_curState.m_break == false)
                 {
                     Tools.AddLog("当前状态正在执行，不能被打断");
                 }
-                else if (m_curState.m_state == State.Executing && m_curState.m_break == true)
+                else if (m_curState.m_state == FSMRunState.Executing && m_curState.m_break == true)
                 {
                     m_curState.ForceExit();
-                    ExecuteState(stateId);
+                    ExecuteState(stateId, args);
                 }
                 else
                 {
-                    ExecuteState(stateId);
+                    ExecuteState(stateId, args);
                 }
             }
             else
             {
-                ExecuteState(stateId);
+                ExecuteState(stateId, args);
             }
         }
     }

@@ -27,7 +27,7 @@ class HeroAttackEffect : GameBehaviour
             m_attackEffect1.gameObject.SetActive(true);
             m_attackEffect1.ShowEffect();
 
-            m_ht["attackType"] = HeroAttackType.Attack1;
+            m_ht["attackType"] = AttackType.Attack1;
             MsgManager.GetInstance().DispatchMsg(HeroMsg.heroAttackMsg, m_ht);
         }
         else if (effect == "attack2" && m_attackEffect2)
@@ -35,7 +35,7 @@ class HeroAttackEffect : GameBehaviour
             m_attackEffect2.gameObject.SetActive(true);
             m_attackEffect2.ShowEffect();
          
-            m_ht["attackType"] = HeroAttackType.Attack2;
+            m_ht["attackType"] = AttackType.Attack2;
             MsgManager.GetInstance().DispatchMsg(HeroMsg.heroAttackMsg, m_ht);
         }
     }
@@ -44,17 +44,17 @@ class HeroAttackEffect : GameBehaviour
     /// 技能特效函数
     /// </summary>
     /// <param name="arg"></param>
-    public void SkillEffect(HeroAttackType attackType)
+    public void SkillEffect(AttackType attackType)
     {
-        if (attackType == HeroAttackType.Skill1)
+        if (attackType == AttackType.Skill1)
         {
             PlaySkill1Effect();
         }
-        else if (attackType == HeroAttackType.Skill2)
+        else if (attackType == AttackType.Skill2)
         {
             PlaySkill2Effect();
         }
-        else if (attackType == HeroAttackType.Skill3)
+        else if (attackType == AttackType.Skill3)
         {
             PlaySkill3Effect();
         }

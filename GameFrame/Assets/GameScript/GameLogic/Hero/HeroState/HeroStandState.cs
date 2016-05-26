@@ -1,5 +1,6 @@
 ﻿using GameFrame;
 using UnityEngine;
+using System.Collections;
 public class HeroStandState : FSMState
 {
     Transform m_heroTransform = null;
@@ -14,10 +15,10 @@ public class HeroStandState : FSMState
         m_stateTime = 10000;
         m_break = true;
         m_executeDalegate = MoveStateExecute;
-        m_stateId = HeroStateDefine.stand;
+        m_stateId = FSMStateIdDefine.stand;
     }
 
-    void MoveStateExecute()
+    void MoveStateExecute(Hashtable args)
     {
         m_heroAnimation.StandAnimation();
     }

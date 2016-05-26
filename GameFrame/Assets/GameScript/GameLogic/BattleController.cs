@@ -1,12 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 using GameFrame;
 
-public class BattleController : Singleton<BattleController> 
+public class BattleController : GameBehaviour
 {
     public HashSet<Transform> m_enermyTransforms = new HashSet<Transform>();
+    public static BattleController m_battleController = null;
 
-    public Transform m_heroTransform = null;
+    private Transform heroTransform;
+
+    public Transform m_heroTransform
+    {
+        set
+        {
+            heroTransform = value;
+            m_heroLogic = Tools.GetComponent<HeroLogic>(heroTransform.gameObject);
+        }
+        get { return heroTransform; }
+    }
+
+    public HeroLogic m_heroLogic = null;
+
+    Hashtable args = new Hashtable();
 
     public HashSet<Transform> HeroGetAttackableEnermies(AttackDirection direction = AttackDirection.Forward)
     {
@@ -73,5 +89,25 @@ public class BattleController : Singleton<BattleController>
             }           
         }
         return hero;
+    }
+
+    protected override void GameFixedUpdate()
+    {
+        if (m_heroTransform != null)
+        {
+            foreach (Transform enermyTransform in m_enermyTransforms)
+            {
+                args.Clear();
+                args["heroTransform"] = m_heroTransform;
+                Tools.GetComponent<EnermyLogic>(enermyTransform.gameObject).m_fsmManager.ChangeState(FSMStateIdDefine.move, args);
+            }
+        }
+    }
+
+    protected override void Init()
+    {
+        m_battleController = this;
+
+        RunFixedUpdate();
     }
 }

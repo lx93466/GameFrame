@@ -14,11 +14,16 @@ public class HeroLogic : GameBehaviour
     protected override void Init()
     {
         base.Init();
-        m_instance = this;
-        BattleController.GetInstance().m_heroTransform = transform;
+        m_instance = this;      
         m_heroFSMManager.AddState(new HeroStandState(transform));
         m_heroFSMManager.AddState(new HeroMoveState(transform));
-        Tools.GetComponent<HeroMove>(gameObject).Run();
+        Tools.AddComponent<HeroMove>(gameObject);
+
+        if (BattleController.m_battleController != null)
+        {
+            BattleController.m_battleController.m_heroTransform = transform;
+
+        }
     }
 
     protected override void Uninit()

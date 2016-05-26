@@ -16,7 +16,7 @@ class State1 : FSMState
     protected override void Init()
     {
         m_stateId = TestStateIdDefine.state1;
-        m_executeDalegate = State1Execute;
+      //  m_executeDalegate = State1Execute;
         m_stateTime = 3;
         m_break = true;
     }
@@ -35,7 +35,7 @@ class State2 : FSMState
     protected override void Init()
     {
         m_stateId = TestStateIdDefine.state2;
-        m_executeDalegate = State2Execute;
+      //  m_executeDalegate = State2Execute;
         m_stateTime = 3;
         m_break = false;
     }
@@ -54,7 +54,7 @@ class State3 : FSMState
     protected override void Init()
     {
         m_stateId = TestStateIdDefine.state3;
-        m_executeDalegate = State3Execute;
+      //  m_executeDalegate = State3Execute;
         m_stateTime = 3;
         m_break = false;
     }

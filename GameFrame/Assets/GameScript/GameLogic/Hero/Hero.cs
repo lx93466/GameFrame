@@ -6,7 +6,7 @@ public enum AttackDirection
     Around//攻击四周
 }
 
-public enum HeroAttackType
+public enum AttackType
 {
     None,     //没有攻击类型
     Attack1,  //第一次攻击 

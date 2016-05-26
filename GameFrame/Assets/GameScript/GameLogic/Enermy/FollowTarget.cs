@@ -19,7 +19,6 @@ public class FollowTarget : GameBehaviour
 
         m_enermyAnimation.MoveAnimation();
     }
-	// Update is called once per frame
 	void Update () 
     {
         if (m_target != null && m_characterCtrl != null)
@@ -28,7 +27,7 @@ public class FollowTarget : GameBehaviour
             float distance = Vector3.Distance(transform.position, m_target.position);
             if (distance > m_battleAttributes.m_attackDistance)
             {
-                m_characterCtrl.SimpleMove(transform.forward * EnermyLogic.m_instance.m_battleAttributes.m_speed);
+               // m_characterCtrl.SimpleMove(transform.forward * EnermyLogic.m_instance.m_battleAttributes.m_speed);
                 m_enermyAnimation.MoveAnimation();
             }
             else

@@ -32,7 +32,7 @@ public class HeroLogic_old : GameBehaviour
         m_hpBar = Tools.GetComponent<HpBar>(gameObject);
         //初始化战斗数据
         m_battleAttributes.Init(3f, 2000, 5, 50, 30, 30, 30);
-        BattleController.GetInstance().m_heroTransform = transform;
+        BattleController.m_battleController.m_heroTransform = transform;
       
         //注册消息
         RegisterMsg(HeroMsg.heroAttackMsg, AttackCallBack);
@@ -41,7 +41,7 @@ public class HeroLogic_old : GameBehaviour
     protected override void Uninit()
     {
         base.Uninit();
-        BattleController.GetInstance().m_heroTransform = null;
+        BattleController.m_battleController.m_heroTransform = null;
     }
 
     void Update()
@@ -71,7 +71,7 @@ public class HeroLogic_old : GameBehaviour
     {
         if (arg != null && arg.ContainsKey("attackType"))//普通攻击时，没有攻击类型
         {
-            HeroAttackType attackType = (HeroAttackType)arg["attackType"];
+            AttackType attackType = (AttackType)arg["attackType"];
 
             AttackEnermies(attackType);
             m_heroAnimation.AttackAnimation(attackType);
@@ -79,27 +79,27 @@ public class HeroLogic_old : GameBehaviour
         }
         else//普通攻击，只触发普通攻击动画播放，在特效中，再发送攻击函数，包含普通攻击类型。
         {
-            m_heroAnimation.AttackAnimation(HeroAttackType.None);
+            m_heroAnimation.AttackAnimation(AttackType.None);
         }
     }
     /// <summary>
     /// 攻击敌人
     /// </summary>
     /// <param name="attackType"></param>
-    void AttackEnermies(HeroAttackType attackType)
+    void AttackEnermies(AttackType attackType)
     {
-        if (attackType == HeroAttackType.Attack1)
+        if (attackType == AttackType.Attack1)
         {
-            HashSet<Transform> enermiesTransform = BattleController.GetInstance().HeroGetAttackableEnermies();
+            HashSet<Transform> enermiesTransform = BattleController.m_battleController.HeroGetAttackableEnermies();
 
             foreach (var enermyTransform in enermiesTransform)
             {
                 EnermyLogic enermyLogic = enermyTransform.GetComponent<EnermyLogic>();
-                enermyLogic.BeAttacked(m_battleAttributes);
+               // enermyLogic.BeAttacked(m_battleAttributes);
             }
         }
     }
-    public void BeAttacked(BattleAttributes enermyAttributes, HeroAttackType attackType = HeroAttackType.Attack1)
+    public void BeAttacked(BattleAttributes enermyAttributes, AttackType attackType = AttackType.Attack1)
     {
         if (enermyAttributes != null)
         {
