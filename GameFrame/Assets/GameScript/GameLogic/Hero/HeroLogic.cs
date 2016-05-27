@@ -17,6 +17,7 @@ public class HeroLogic : GameBehaviour
         m_instance = this;      
         m_heroFSMManager.AddState(new HeroStandState(transform));
         m_heroFSMManager.AddState(new HeroMoveState(transform));
+        m_heroFSMManager.AddState(new HeroAttackState(transform));
         Tools.AddComponent<HeroInputSystem>(gameObject);
 
         if (BattleController.m_battleController != null)

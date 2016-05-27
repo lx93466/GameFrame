@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace GameFrame
 {
@@ -136,7 +137,7 @@ namespace GameFrame
             
             if (m_changeState.m_runState == FSMRunState.Executing && m_changeState.m_break == false)
             {
-                Tools.AddLog("状态正在执行，不能被打断");
+                //Tools.AddLog("被切换状态正在执行，不能被打断");
             }
             else if(m_changeState.m_runState == FSMRunState.Executing && m_changeState.m_break == true)
             {
@@ -153,17 +154,16 @@ namespace GameFrame
 
         public void ChangeState(FSMStateId stateId, Hashtable args = null)
         {
-            if (m_curState != null)
+            if (m_states.TryGetValue(stateId, out m_changeState))
             {
-                if (m_states.TryGetValue(stateId, out m_changeState))
+                if (m_curState != null)
                 {
                     m_curState.m_nextState = m_changeState;
-                  
+
                     m_curState.PreChangeToNextState();
-                  
                     if (m_curState.m_runState == FSMRunState.Executing && m_curState.m_break == false)
                     {
-                        Tools.AddLog("当前状态正在执行，不能被打断");
+                        //Tools.AddLog("当前状态正在执行，不能被打断");
                     }
                     else if (m_curState.m_runState == FSMRunState.Executing && m_curState.m_break == true)
                     {
@@ -174,11 +174,21 @@ namespace GameFrame
                     {
                         ExecuteState(stateId, args);
                     }
+
+                }
+                else
+                {
+                    ExecuteState(stateId, args);
                 }
             }
-            else
+        }
+
+        public void ForceEndState(FSMStateId stateId)
+        {
+            FSMState state = null;
+            if (m_states.TryGetValue(stateId, out state))
             {
-                ExecuteState(stateId, args);
+                state.ForceExit();
             }
         }
     }

@@ -6607,7 +6607,8 @@ public class iTween : MonoBehaviour{
 
 	void LateUpdate(){
 		//look applications:
-		if(tweenArguments.Contains("looktarget") && isRunning){
+        if (tweenArguments != null && tweenArguments.Contains("looktarget") && isRunning)
+        {
 			if(type =="move" || type =="shake" || type=="punch"){
 				LookUpdate(gameObject,tweenArguments);
 			}			

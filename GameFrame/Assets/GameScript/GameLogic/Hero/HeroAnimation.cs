@@ -8,7 +8,7 @@ public class HeroAnimation : GameBehaviour
     
     protected override void Init()
     {
-        m_animator = GetComponent<Animator>();
+        m_animator = GetComponent<Animator>();    
     }
 
     public void StandAnimation()
@@ -34,7 +34,7 @@ public class HeroAnimation : GameBehaviour
     {
         //点击普通攻击按钮时，无法判断攻击类型，触发普通攻击动画
         //AttackType.Attack1和HeroAttackType.Attack2类型在特效函数中分发消息参数 
-        if (attackType == AttackType.None)
+        if (attackType == AttackType.Attack)
         {
             PlayAttackAnimation();
         }
@@ -60,7 +60,7 @@ public class HeroAnimation : GameBehaviour
         if (m_animator != null)
         {
             m_animator.SetTrigger("attack");
-            iTween.MoveBy(this.gameObject, Vector3.forward * 2, 0.4f);
+            iTween.MoveBy(this.gameObject, Vector3.forward, 0.4f);
         }
     }
 
@@ -77,5 +77,11 @@ public class HeroAnimation : GameBehaviour
     void PlaySkill3Animation()
     {
 
+    }
+
+    //攻击动画播放结束后自动调用(动画结束后添加的事件)
+    public void ForceExitAttackState()
+    {
+        HeroLogic.m_instance.m_heroFSMManager.ForceEndState(FSMStateIdDefine.attack);
     }
 }

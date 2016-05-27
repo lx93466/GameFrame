@@ -24,6 +24,8 @@ public class BattleUI : UIBase
 
     TimerManager m_timerManager = TimerManager.GetInstance();
 
+    Hashtable m_args = new Hashtable();
+
     protected override void BeforeOpen()
     {
         m_path = "UIPrefab";
@@ -37,10 +39,10 @@ public class BattleUI : UIBase
 
     protected override void AftertOpen()
     {
-        RegisterUIEvent("Skill0", OnSkill0, null, UIEventType.onClickDown);
-        RegisterUIEvent("Skill1", OnSkill1, null, UIEventType.onClickDown);
-        RegisterUIEvent("Skill2", OnSkill2, null, UIEventType.onClickDown);
-        RegisterUIEvent("Skill3", OnSkill3, null, UIEventType.onClickDown);
+        RegisterUIEvent("Skill0", OnSkill0Click, null, UIEventType.onClickDown);
+        RegisterUIEvent("Skill1", OnSkill1Click, null, UIEventType.onClickDown);
+        RegisterUIEvent("Skill2", OnSkill2Click, null, UIEventType.onClickDown);
+        RegisterUIEvent("Skill3", OnSkill3Click, null, UIEventType.onClickDown);
 
         RegisterUIEvent("Skill0", ClickDown, null, UIEventType.onClickDown);
         RegisterUIEvent("Skill1", ClickDown, null, UIEventType.onClickDown);
@@ -63,13 +65,14 @@ public class BattleUI : UIBase
         return Singleton<BattleUI>.GetInstance();
     }
 
-    private void OnSkill0(PointerEventData data)
+    private void OnSkill0Click(PointerEventData data)
     {
-        //普通攻击，此处没有攻击类型，因为无法判定。在特效回调中还会发送攻击消息，原因：可以判定攻击类型。普通攻击分单次攻击和连续两连击，只有特效触发函数能区分      
-        MsgManager.GetInstance().DispatchMsg(HeroMsg.heroAttackMsg); 
+        m_args.Clear();
+        m_args["attackType"] = AttackType.Attack;
+        MsgManager.GetInstance().DispatchMsg(HeroMsgDefine.heroAttackMsg, m_args); 
     }
 
-    private void OnSkill1(PointerEventData data)
+    private void OnSkill1Click(PointerEventData data)
     {
         if (m_filledSkill1 != null)
         {
@@ -85,16 +88,14 @@ public class BattleUI : UIBase
                 m_filledSkill1.GetComponent<Image>().fillAmount = 1;
                 m_timerId1 = m_timerManager.GetTimerID();
                 m_timerManager.Schedule(ColdSkill1, m_timerId1, 0.05f);
-               
-                //触发攻击敌人逻辑
-                Hashtable arg = new Hashtable();
-                arg["attackType"] = AttackType.Skill1;
-                MsgManager.GetInstance().DispatchMsg(HeroMsg.heroAttackMsg, arg);
+
+                m_args["attackType"] = AttackType.Skill1;
+                MsgManager.GetInstance().DispatchMsg(HeroMsgDefine.heroAttackMsg, m_args); 
             }           
         }
     } 
     
-    private void OnSkill2(PointerEventData data)
+    private void OnSkill2Click(PointerEventData data)
     {
         if (m_filledSkill2 != null)
         {
@@ -110,15 +111,13 @@ public class BattleUI : UIBase
                 m_timerId2 = m_timerManager.GetTimerID();
                 m_timerManager.Schedule(ColdSkill2, m_timerId2, 0.05f);
 
-                //触发攻击敌人逻辑
-                Hashtable arg = new Hashtable();
-                arg["attackType"] = AttackType.Skill2;
-                MsgManager.GetInstance().DispatchMsg(HeroMsg.heroAttackMsg, arg);
+                m_args["attackType"] = AttackType.Skill2;
+                MsgManager.GetInstance().DispatchMsg(HeroMsgDefine.heroAttackMsg, m_args); 
             }
         }
     }
     
-    private void OnSkill3(PointerEventData data)
+    private void OnSkill3Click(PointerEventData data)
     {
         if (m_filledSkill3 != null)
         {
@@ -134,10 +133,8 @@ public class BattleUI : UIBase
                 m_timerId3 = m_timerManager.GetTimerID();
                 m_timerManager.Schedule(ColdSkill3, m_timerId3, 0.05f);
 
-                //触发攻击敌人逻辑
-                Hashtable arg = new Hashtable();
-                arg["attackType"] = AttackType.Skill3;
-                MsgManager.GetInstance().DispatchMsg(HeroMsg.heroAttackMsg, arg);
+                m_args["attackType"] = AttackType.Skill3;
+                MsgManager.GetInstance().DispatchMsg(HeroMsgDefine.heroAttackMsg, m_args); 
             }
         }
     }
@@ -214,12 +211,16 @@ public class BattleUI : UIBase
     private void ClickDown(PointerEventData data)
     {
         data.pointerPress.transform.localScale = new Vector3(1, 1, 1) * 1.1f;
+
+        m_args.Clear();
+        m_args["enable"] = false;
+        MsgManager.GetInstance().DispatchMsg(HeroMsgDefine.heroEnableAgentMsg, m_args);
     }
 
     private void ClickUp(PointerEventData data)
     {
         data.pointerPress.transform.localScale = new Vector3(1, 1, 1);
+        m_args["enable"] = true;
+        MsgManager.GetInstance().DispatchMsg(HeroMsgDefine.heroDisableAgentMsg, m_args);
     }
-
-   
 }

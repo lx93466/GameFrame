@@ -35,7 +35,7 @@ public class HeroLogic_old : GameBehaviour
         BattleController.m_battleController.m_heroTransform = transform;
       
         //注册消息
-        RegisterMsg(HeroMsg.heroAttackMsg, AttackCallBack);
+       // RegisterMsg(HeroMsgDefine.heroAttackMsg, AttackCallBack);
     }
 
     protected override void Uninit()

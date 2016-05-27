@@ -9,8 +9,9 @@ public enum AttackDirection
 public enum AttackType
 {
     None,     //没有攻击类型
-    Attack1,  //第一次攻击 
-    Attack2,  //第二次连击
+    Attack,   //点击普通攻击按钮时的攻击类型, 播放攻击动画
+    Attack1,  //普通动作回调第一次攻击，计算伤害
+    Attack2,  //普通动作回调第二次连击，计算伤害
     Skill1,   //技能1攻击
     Skill2,   //技能2攻击
     Skill3    //技能3攻击

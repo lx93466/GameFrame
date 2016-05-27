@@ -81,14 +81,16 @@ namespace GameFrame
         {
             GetComponent<T>(gameObject);
         }
-       /// <summary>
-       /// 给动画添加事件
-       /// </summary>
-       /// <param name="animator">动画实例</param>
-       /// <param name="motionName">状态机对应motion名称</param>
-       /// <param name="fnName">事件调用函数名称</param>
-       /// <param name="triggerTime">事件触发时间：triggerTime < 0 | triggerTime > 动画播放最长时间 时，事件添加在动画播放结束时</param>
-       /// <param name="args">事件触发时的参数</param>
+
+      
+        /// <summary>
+        /// 给动画添加事件
+        /// </summary>
+        /// <param name="animator">动画实例</param>
+        /// <param name="motionName">状态机对应motion名称</param>
+        /// <param name="fnName">事件调用函数名称</param>
+        /// <param name="triggerTime">事件触发时间：triggerTime < 0 | triggerTime > 动画播放最长时间 时，事件添加在动画播放结束时</param>
+        /// <param name="args">事件触发时的参数</param>
         public static void AddAnimatorEvent(Animator animator, string motionName, string fnName, float triggerTime = -1f, string args = "")
         {
             if (animator != null && motionName != null && motionName.Length > 0 && fnName != null && fnName.Length > 0)
@@ -125,6 +127,27 @@ namespace GameFrame
                     }
                 }
             }
+        }
+
+        public static float GetAnimatorClipTime(Animator animator, string motionName)
+        {
+            float time = 0f;
+            
+            if (animator != null && motionName != null && motionName.Length > 0)
+            {
+
+                AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
+
+                for (int i = 0; i < clips.Length; i++)
+                {
+                    AnimationClip clip = clips[i];
+                    if (clip.name == motionName)
+                    {
+                        time = clip.length;
+                    }
+                }
+            }
+            return time;
         }
         /// <summary>
         /// 锁屏、解锁屏

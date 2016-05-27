@@ -47,7 +47,8 @@ namespace GameFrame
         {
             Tools.AddLog("Load Scene:" + m_scenePath + "/" + m_sceneFile);
 
-            SceneManager.LoadScene(m_scenePath + "/" + m_sceneFile, m_loadSceneMode);
+            Application.LoadLevel(m_scenePath + "/" + m_sceneFile);
+            //SceneManager.LoadScene(m_scenePath + "/" + m_sceneFile, m_loadSceneMode);
 
             // 直接在此处动态创建对象时，属于上一个场景。因为此帧还属于上一场景的帧。
             TimerManager.GetInstance().DelayCall(OpenUI);

@@ -7,6 +7,7 @@ public enum HeroInputSignal
 {
     None,
     Move,
+    Attack,
     Attack1,
     Attack2,
     Skill1,
@@ -22,8 +23,25 @@ public class HeroInputSystem : GameBehaviour
     protected override void Init()
     {
         m_instance = this;
+        RegisterMsg(HeroMsgDefine.heroAttackMsg, DealHeroAttackMsg);
+        RegisterMsg(HeroMsgDefine.heroEnableAgentMsg, DealNavMeshAgentMsg);
+        RegisterMsg(HeroMsgDefine.heroDisableAgentMsg, DealNavMeshAgentMsg);
+
         RunFixedUpdate();
     }
+
+    void DealHeroAttackMsg(Hashtable args)
+    {
+        HeroLogic.m_instance.m_heroFSMManager.ChangeState(FSMStateIdDefine.attack, args);
+    }
+
+    void DealNavMeshAgentMsg(Hashtable args)
+    {
+        bool enable = (bool)args["enable"];
+        NavMeshAgent agent = Tools.GetComponent<NavMeshAgent>(gameObject);
+        agent.enabled = enable;
+    }
+
     protected override void GameFixedUpdate()
     {
         m_args.Clear();
@@ -39,8 +57,12 @@ public class HeroInputSystem : GameBehaviour
                 return;
             }
         }
-        switch (m_curSignal)
+       /* switch (m_curSignal)
         {
+            case HeroInputSignal.Attack:
+                m_args["attackType"] = AttackType.Attack;
+                HeroLogic.m_instance.m_heroFSMManager.ChangeState(FSMStateIdDefine.attack, m_args);
+                break;
             case HeroInputSignal.Attack1:
                 m_args["attackType"] = AttackType.Attack1;
                 HeroLogic.m_instance.m_heroFSMManager.ChangeState(FSMStateIdDefine.attack, m_args);
@@ -63,7 +85,8 @@ public class HeroInputSystem : GameBehaviour
                 break;
             default:
                 break;
-        }
+        }*/
+        m_curSignal = HeroInputSignal.None;
     }
 }
 

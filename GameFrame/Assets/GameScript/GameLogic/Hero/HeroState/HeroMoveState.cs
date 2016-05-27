@@ -25,7 +25,6 @@ public class HeroMoveState : FSMState
         if (m_agent.nextPosition == m_agent.pathEndPosition)
         {
             StopMove();
-            m_agent.ResetPath();
         }
     }
 
@@ -36,16 +35,22 @@ public class HeroMoveState : FSMState
     }
     public void Move(Vector3 pos)
     {
-        m_agent.SetDestination(pos);
-        m_heroTransform.LookAt(pos);
-        m_heroAnimation.MoveAnimation();
+        if (m_agent.enabled)
+        {
+            m_agent.SetDestination(pos);
+            m_heroTransform.LookAt(pos);
+            m_heroAnimation.MoveAnimation();
+        }
     }
 
     public void StopMove()
     {
-        m_agent.Stop();
-        m_agent.ResetPath();
-        m_fsmControlManager.ChangeState(FSMStateIdDefine.stand);
+        if (m_agent.enabled)
+        {
+            m_agent.Stop();
+            m_agent.ResetPath();
+            m_fsmControlManager.ChangeState(FSMStateIdDefine.stand);
+        }
     }
 }
 

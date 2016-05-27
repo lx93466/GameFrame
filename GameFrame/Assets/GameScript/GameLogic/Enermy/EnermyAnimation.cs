@@ -13,7 +13,7 @@ public class EnermyAnimation : GameBehaviour
 
         m_stateSetting.SetAnimator(m_animator);
 
-        Tools.AddAnimatorEvent(m_animator, "FlowerAttack", "EndAttackAnimation");
+       // Tools.AddAnimatorEvent(m_animator, "FlowerAttack", "EndAttackAnimation");
 
         m_stateSetting.AddBoolState("stand");
         m_stateSetting.AddBoolState("move");

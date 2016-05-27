@@ -28,7 +28,7 @@ class HeroAttackEffect : GameBehaviour
             m_attackEffect1.ShowEffect();
 
             m_ht["attackType"] = AttackType.Attack1;
-            MsgManager.GetInstance().DispatchMsg(HeroMsg.heroAttackMsg, m_ht);
+            MsgManager.GetInstance().DispatchMsg(HeroMsgDefine.heroAttackMsg, m_ht);
         }
         else if (effect == "attack2" && m_attackEffect2)
         {
@@ -36,7 +36,7 @@ class HeroAttackEffect : GameBehaviour
             m_attackEffect2.ShowEffect();
          
             m_ht["attackType"] = AttackType.Attack2;
-            MsgManager.GetInstance().DispatchMsg(HeroMsg.heroAttackMsg, m_ht);
+            MsgManager.GetInstance().DispatchMsg(HeroMsgDefine.heroAttackMsg, m_ht);
         }
     }
 
