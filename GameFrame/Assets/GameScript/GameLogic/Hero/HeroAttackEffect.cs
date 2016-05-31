@@ -24,6 +24,7 @@ class HeroAttackEffect : GameBehaviour
         Debug.Log(effect);
         if (effect == "attack1" && m_attackEffect1)
         {
+           
             m_attackEffect1.gameObject.SetActive(true);
             m_attackEffect1.ShowEffect();
 

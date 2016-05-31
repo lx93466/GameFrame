@@ -52,7 +52,6 @@ namespace GameFrame
             Init();
             m_runState = FSMRunState.Initialized;
         }
-       
 
         public void Execute(Hashtable args)
         {
